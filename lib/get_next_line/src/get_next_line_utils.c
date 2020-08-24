@@ -6,20 +6,20 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:30:20 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/22 11:02:40 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/08/24 19:00:41 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strdup(const char *s)
+char	*g_ft_strdup(const char *s)
 {
 	char	*src;
 	char	*dest;
 	int		i;
 
 	src = (char*)s;
-	dest = malloc(ft_strlen(src) * sizeof(char) + 1);
+	dest = malloc(g_ft_strlen(src) * sizeof(char) + 1);
 	if (dest == NULL)
 		return (NULL);
 	i = 0;
@@ -32,7 +32,7 @@ char	*ft_strdup(const char *s)
 	return (dest);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*g_ft_strjoin(char const *s1, char const *s2)
 {
 	char	*concat;
 	int		i;
@@ -40,7 +40,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	concat = malloc((ft_strlen(s1) + ft_strlen(s2) + 1));
+	concat = malloc((g_ft_strlen(s1) + g_ft_strlen(s2) + 1));
 	if (concat == NULL)
 		return (NULL);
 	i = 0;
@@ -60,7 +60,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (concat);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*g_ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*src;
 	char	*dest;
@@ -69,8 +69,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	src = (char*)s;
-	if (ft_strlen(src) < start)
-		return (ft_strdup(""));
+	if (g_ft_strlen(src) < start)
+		return (g_ft_strdup(""));
 	if (!(dest = malloc(len + 1 * sizeof(char))))
 		return (NULL);
 	i = 0;
@@ -84,7 +84,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (dest);
 }
 
-size_t	ft_strlen(const char *s)
+size_t	g_ft_strlen(const char *s)
 {
 	int i;
 
@@ -94,7 +94,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*g_ft_strchr(const char *s, int c)
 {
 	int i;
 

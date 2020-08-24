@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalba-de <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:00:19 by dalba-de          #+#    #+#             */
-/*   Updated: 2019/12/13 17:09:51 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/08/24 18:59:53 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ static int	fill_char(char **s, char **line, int fd)
 		i++;
 	if (s[fd][i] == '\n')
 	{
-		*line = ft_substr(s[fd], 0, i);
-		aux = ft_strdup(s[fd] + i + 1);
+		*line = g_ft_substr(s[fd], 0, i);
+		aux = g_ft_strdup(s[fd] + i + 1);
 		free(s[fd]);
 		s[fd] = aux;
 	}
 	else if (s[fd][i] == '\0')
 	{
-		*line = ft_strdup(s[fd]);
+		*line = g_ft_strdup(s[fd]);
 		free(s[fd]);
 		s[fd] = NULL;
 		return (0);
@@ -43,7 +43,7 @@ static int	result(int r, char **s, char **line, int fd)
 		return (-1);
 	else if (r == 0 && (s[fd] == NULL || s[fd][0] == '\0'))
 	{
-		*line = ft_strdup("");
+		*line = g_ft_strdup("");
 		free(s[fd]);
 		s[fd] = NULL;
 		return (0);
@@ -65,14 +65,14 @@ int			get_next_line(int fd, char **line)
 	{
 		buffer[r] = '\0';
 		if (s[fd] == NULL)
-			s[fd] = ft_strdup(buffer);
+			s[fd] = g_ft_strdup(buffer);
 		else
 		{
-			aux = ft_strjoin(s[fd], buffer);
+			aux = g_ft_strjoin(s[fd], buffer);
 			free(s[fd]);
 			s[fd] = aux;
 		}
-		if (ft_strchr(s[fd], '\n'))
+		if (g_ft_strchr(s[fd], '\n'))
 			break ;
 	}
 	free(buffer);
