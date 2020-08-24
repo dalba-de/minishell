@@ -29,8 +29,8 @@ endef
 ################################################################################
 ### CONFIG
 ################################################################################
-#-fsanitize=address
-NAME		= minishell
+
+NAME		= get_next_line.a
 NAMEMAIN	= a.out
 CFLAGS		= -Wall -Werror -Wextra -g
 ARFLAGS		= -crs
@@ -39,17 +39,16 @@ MKDIR		= mkdir -p
 SRC			= src
 OBJ			= obj
 ALLCS		= $(shell find $(SRC) -type f -iname "*.c")
-ALLCSLIBS	= $(shell find $(LIBDIR) -type f -iname "*.c")
+#ALLCSLIBS	= $(shell find $(LIBDIR) -type f -iname "*.c")
 ALLCOBJS	= $(foreach F,$(ALLCS),$(call C2O,$(F)))
-ALLCOBJSLIBS= $(foreach F,$(ALLCSLIBS),$(call CL2O,$(F)))
+#ALLCOBJSLIBS= $(foreach F,$(ALLCSLIBS),$(call CL2O,$(F)))
 SUBDIRS 	= $(shell find $(SRC) -type d)
 OBJSUBDIRS	= $(patsubst $(SRC)%,$(OBJ)%,$(SUBDIRS))
-LIBPRINTF	= $(SRC)/printf/ft_printf.h
-MAIN		= main.c
-LIBDIR		= lib
-LIBS		= $(LIBDIR)/libft/libft.a $(LIBDIR)/get_next_line/get_next_line.a
-INCDIRS		= -I$(SRC) -I$(LIBDIR)
-INCDIRS2	= $(INCDIRS)
+#LIBPRINTF	= $(SRC)/printf/ft_printf.h
+#MAIN		= main.c
+#LIBDIR		= lib
+#LIBS		= $(LIBDIR)//libft/libft.a
+#INCDIRS		= -I$(SRC) -I$(LIBDIR)
 
 ################################################################################
 ### RULES
@@ -58,28 +57,26 @@ INCDIRS2	= $(INCDIRS)
 # Entrada por defecto
 all			:	$(NAME)
 
-# Entrada para el bonus
-bonus		:	$(NAME)
-
-# Genera programa Cube3d
-$(NAME)	:	$(OBJSUBDIRS) $(LIBS) $(ALLCOBJS)
-	$(C) $(CFLAGS) $(INCDIRS2) -o $(NAME) $(ALLCOBJS) $(LIBS)
+# Genera get_next_line
+$(NAME)		:	$(OBJSUBDIRS) $(ALLCOBJS)
+	ar $(ARFLAGS) $(NAME) $(ALLCOBJS)
+	ranlib $(NAME)
 
 # Generate rules for all objects
-$(foreach F,$(ALLCS), $(eval $(call COMPILER,$(C),$(call C2O,$(F)),$(F),$(CFLAGS) $(INCDIRS))))
-$(foreach F,$(ALLCSLIBS), $(eval $(call COMPILER,$(C),$(call CL2O,$(F)),$(F),$(CFLAGS) $(INCDIRS))))
+$(foreach F,$(ALLCS), $(eval $(call COMPILER,$(C),$(call C2O,$(F)),$(F),$(CFLAGS))))
+#$(foreach F,$(ALLCSLIBS), $(eval $(call COMPILER,$(C),$(call CL2O,$(F)),$(F),$(CFLAGS))))
 
 # Compila librerias
-$(LIBS)		:
-	$(MAKE) -C $(LIBDIR)
+#$(LIBS)		:
+#	$(MAKE) -C $(LIBDIR)/libft
 
 # clean librerias
-libs-clean:
-	$(MAKE) -C $(LIBDIR) clean
+#libs-clean:
+#	$(MAKE) -C $(LIBDIR)/libft clean
 
 # fclean librerias
-libs-fclean:
-	$(MAKE) -C $(LIBDIR) fclean
+#libs-fclean:
+#	$(MAKE) -C $(LIBDIR)/libft fclean
 
 # Crea arbol de carpetas
 $(OBJSUBDIRS):
@@ -87,14 +84,12 @@ $(OBJSUBDIRS):
 
 # limpia los .o
 clean		:
-	@echo Delete all objects
 	@rm -f $(ALLCOBJS)
 	@rm -f $(ALLCOBJSLIBS)
 	@rm -f *.gch
 
 # Elimina los .o y el ejecutable
-fclean		: clean libs-fclean
-	@echo Delete program
+fclean		: clean
 	@rm -f $(NAME)
 	@rm -f $(NAMEMAIN)
 
