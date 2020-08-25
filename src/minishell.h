@@ -20,6 +20,7 @@ typedef struct	s_mini
 	char		**lines;
 	char		*input;
 	int			start;
+	char		***ev;
 }				t_mini;
 
 #endif
