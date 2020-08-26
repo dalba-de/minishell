@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char	*ft_strcdup(const char *s1, char c)
+char		*ft_strcdup(const char *s1, char c)
 {
 	int		cont;
 	char	*arr;
@@ -35,7 +35,7 @@ char	*ft_strcdup(const char *s1, char c)
 	return (arr);
 }
 
-char	*ft_strcdupinv(const char *s1, char c)
+char		*ft_strcdupinv(const char *s1, char c)
 {
 	int		cont;
 	int		cont2;
@@ -64,7 +64,7 @@ char	*ft_strcdupinv(const char *s1, char c)
 	return (arr);
 }
 
-int		count_line(char **envp)
+static int	count_line_envp(char **envp)
 {
 	int	cont;
 
@@ -74,14 +74,14 @@ int		count_line(char **envp)
 	return (cont);
 }
 
-char	***loadev(char **envp)
+char		***loadev(char **envp)
 {
 	int		lenline;
 	char	***arr;
 	int		cont;
 	int		cont2;
 
-	lenline = count_line(envp);
+	lenline = count_line_envp(envp);
 	arr = malloc(sizeof(char *) * (lenline + 1));
 	cont = 0;
 	while (cont < lenline)
