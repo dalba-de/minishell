@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:57:10 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/26 14:06:07 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/08/26 17:36:32 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ void get_path_string(char ***tmp_envp, char *bin_path)
 
 void insert_path_str_to_search(char *path_str, t_mini *all) 
 {
-	int index=0;
+	int index;
 	char *tmp = path_str;
 	char ret[100];
+	ft_bzero(ret, 100);
 
+	index = 0;
 	while(*tmp != '\0') {
 		if(*tmp == ':') {
 			ft_strncat(ret, "/", 1);
@@ -47,10 +49,5 @@ void insert_path_str_to_search(char *path_str, t_mini *all)
 		}
 		tmp++;
 	}
-	index = 0;
-	while (all->search_path[index] != NULL)
-	{
-		ft_putendl_fd(all->search_path[index], 1);
-		index++;
-	}
+	all->search_path[index] = '\0';
 }

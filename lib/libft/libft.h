@@ -61,6 +61,7 @@ size_t				ft_strlcat(char *dst, char const *src, size_t dstsize);
 char				*ft_strncat(char *dest, char *src, int nb);
 size_t				ft_strlcpy(char *dst, char const *src, size_t dstsize);
 char				*ft_strcpy(char *dst, char const *src);
+char 				*ft_strncpy(char *dest, char *src, unsigned int n);
 size_t				ft_strlen(const char *s);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int					ft_strncmp(const char *str1, const char *str2, size_t n);
