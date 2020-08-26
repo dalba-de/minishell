@@ -5,6 +5,7 @@
 # include <get_next_line/src/get_next_line.h>
 # include <libft/libft.h>
 # include <stdio.h>
+# include <errno.h>
 # include <limits.h>
 # include <linux/limits.h>
 # include <pthread.h>
@@ -15,12 +16,21 @@
 # include <fcntl.h>
 # include <string.h>
 
+extern int errno;
+
 typedef struct	s_mini
 {
 	char		**lines;
 	char		*input;
 	int			start;
 	char		***ev;
+	char		*path_str;
+	char		*search_path[10];
 }				t_mini;
+
+char	***loadev(char **envp);
+void	check_pipes(char *line, t_mini *all);
+void	get_path_string(char ***tmp_envp, char *bin_path);
+void 	insert_path_str_to_search(char *path_str, t_mini *all);
 
 #endif
