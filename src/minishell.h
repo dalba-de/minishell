@@ -20,6 +20,7 @@ extern int errno;
 
 typedef struct	s_mini
 {
+	int			pipe_flag;
 	char		**lines;
 	char		*input;
 	int			start;
