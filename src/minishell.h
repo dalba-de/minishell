@@ -36,6 +36,11 @@ void	check_pipes(char *line, t_mini *all);
 void	get_path_string(char ***tmp_envp, char *bin_path);
 void 	insert_path_str_to_search(char *path_str, t_mini *all);
 void	fill_argv(char *tmp_argv, t_mini *all);
-int		try_exec(t_mini *all);	
+int		try_exec(t_mini *all);
+/*
+** ---------------------utilev------------------
+*/
+void	freecer(char ***ev, int len);
+int		count_line(char ***envp);
 
 #endif
