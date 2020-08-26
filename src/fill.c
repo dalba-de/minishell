@@ -6,13 +6,13 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:14:53 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/26 18:27:52 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/08/26 18:44:39 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	fill_gap(t_mini *all, int ret, int index)
+void	fill_gap(t_mini *all, char *ret, int index)
 {
 	if (all->my_argv[index] == NULL)
 		all->my_argv[index] = (char *)malloc(sizeof(char) * ft_strlen(ret) + 1);
