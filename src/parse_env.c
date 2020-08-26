@@ -96,5 +96,7 @@ char	***loadev(char **envp)
 		}
 		cont++;
 	}
+	arr[cont][0] = NULL;
+	arr[cont][1] = NULL;
 	return (arr);
 }
