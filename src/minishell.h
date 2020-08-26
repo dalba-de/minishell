@@ -32,5 +32,6 @@ char	***loadev(char **envp);
 void	check_pipes(char *line, t_mini *all);
 void	get_path_string(char ***tmp_envp, char *bin_path);
 void 	insert_path_str_to_search(char *path_str, t_mini *all);
+int		count_line(char **envp);
 
 #endif
