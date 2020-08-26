@@ -24,9 +24,11 @@ typedef struct	s_mini
 	char		*input;
 	int			start;
 	char		***ev;
+	char		**env;
 	char		*path_str;
 	char		*search_path[10];
 	char 		*my_argv[100];
+	char		*cmd;
 }				t_mini;
 
 char	***loadev(char **envp);
@@ -34,5 +36,6 @@ void	check_pipes(char *line, t_mini *all);
 void	get_path_string(char ***tmp_envp, char *bin_path);
 void 	insert_path_str_to_search(char *path_str, t_mini *all);
 void	fill_argv(char *tmp_argv, t_mini *all);
+int		try_exec(t_mini *all);	
 
 #endif

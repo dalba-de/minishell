@@ -6,16 +6,17 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:45:11 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/26 18:21:58 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/08/26 19:46:47 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init(t_mini	*all)
+void	init(t_mini	*all, char **envp)
 {
 	ft_bzero(all, sizeof(all));
 	all->path_str = (char *)malloc(sizeof(char) * 256);
+	all->env = envp;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -26,7 +27,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	init(&all);
+	init(&all, envp);
 	all.ev = loadev(envp);
 	get_path_string(all.ev, all.path_str);
 	insert_path_str_to_search(all.path_str, &all);
@@ -38,7 +39,10 @@ int	main(int argc, char **argv, char **envp)
 		check_pipes(line, &all);
 		i = 0;
 		while (all.lines[i] != NULL)
+		{
 			fill_argv(all.lines[i++], &all);
+			try_exec(&all);
+		}		
 	}
 	return (0);
 }
