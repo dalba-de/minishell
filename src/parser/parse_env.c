@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:33:28 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/26 17:44:48 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/08/26 18:21:46 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ char	***loadev(char **envp)
 		}
 		cont++;
 	}
+	arr[cont] = malloc(sizeof(char *) * (2));
 	arr[cont][0] = NULL;
 	arr[cont][1] = NULL;
 	return (arr);
