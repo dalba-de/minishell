@@ -22,6 +22,16 @@ void	freecer(char ***ev, int len)
 	ev = NULL;
 }
 
+static int		count_line(char ***envp)
+{
+	int	cont;
+
+	cont = 0;
+	while (envp[cont] != NULL)
+		cont++;
+	return (cont);
+}
+
 void	addev(t_mini *all, char *key, char *value)
 {
 	int		len;
