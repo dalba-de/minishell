@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search_key_ev.c                                    :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dalba-de <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/27 12:53:06 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/27 12:53:07 by dalba-de         ###   ########.fr       */
+/*   Created: 2019/11/12 12:49:03 by dalba-de          #+#    #+#             */
+/*   Updated: 2019/11/12 12:49:05 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-char	*search_key_ev(char	***ev, char *key)
+char	*ft_strchr(const char *s, int c)
 {
-	int	cont;
+	int i;
 
-	cont = 0;
-	while (ev[cont])
+	i = 0;
+	while (s[i] != c)
 	{
-		if (ft_strncmp(ev[cont][0], key, ft_strlen(ev[cont][0])) == 0)
-			return (ft_strdup(ev[cont][1]));
-		cont++;
+		if (s[i] == '\0')
+			return (NULL);
+		i++;
 	}
-	return (NULL);
+	return ((char*)&s[i]);
 }

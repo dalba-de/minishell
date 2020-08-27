@@ -25,5 +25,6 @@ void	ft_echo(t_mini *all)
 		}
 		cont++;
 	}
-	ft_putchar_fd('\n', 1);
+	if (!ft_strncmp(all->my_argv[1], "-n", 2))
+		ft_putchar_fd('\n', 1);
 }

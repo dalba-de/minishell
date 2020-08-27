@@ -1,51 +1,98 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: dalba-de <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/11/12 16:00:37 by dalba-de          #+#    #+#              #
-#    Updated: 2019/11/17 22:43:17 by dalba-de         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+################################################################################
+### MACROS
+################################################################################
 
-NAME= libft.a
+# $(1) : Compiler
+# $(2) : Object file to generate
+# $(3) : Source file
+# $(4) : Compiler flags
+define COMPILER
+$(2) : $(3)
+	$(1) -c $(4) -o $(2) $(3)
+endef
 
-CC= gcc
+# $(1) : Source file
+define C2O
+$(patsubst %.c,%.o,$(patsubst $(SRC)%,$(OBJ)%,$(1)))
+endef
 
-CFLAGS= -Wall -Werror -Wextra -I. -c
+# $(1) : Source file
+define CL2O
+$(patsubst %.c,%.o,$(1))
+endef
 
-SRC=	ft_atoi.c ft_itoa.c ft_putnbr_fd.c ft_strlen.c ft_toupper.c ft_bzero.c ft_putstr_fd.c ft_strmapi.c ft_calloc.c \
-		ft_memccpy.c ft_split.c ft_strncmp.c ft_isalnum.c ft_memchr.c ft_strchr.c ft_strnstr.c ft_isalpha.c	ft_memcmp.c	\
-		ft_strdup.c	ft_strrchr.c ft_isascii.c ft_memcpy.c ft_strjoin.c ft_strtrim.c ft_isdigit.c ft_memmove.c ft_strlcat.c \
-		ft_strncat.c ft_substr.c ft_isprint.c ft_memset.c ft_strlcpy.c ft_strcpy.c ft_tolower.c ft_putchar_fd.c ft_putendl_fd.c \
-		ft_strncpy.c
+# $(1) : Source file
+define C2H
+$(patsubst %.c,%.h,$(1))
+endef
 
-BONUS=	ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c ft_lstclear_bonus.c ft_lstdelone_bonus.c ft_lstiter_bonus.c ft_lstlast_bonus.c \
-		ft_lstmap_bonus.c ft_lstnew_bonus.c ft_lstsize_bonus.c
+################################################################################
+### CONFIG
+################################################################################
 
-OBJ=	${SRC:.c=.o}
+NAME		= libft.a
+NAMEMAIN	= a.out
+CFLAGS		= -Wall -Werror -Wextra -g
+ARFLAGS		= -crs
+C			= gcc
+MKDIR		= mkdir -p
+SRC			= src
+OBJ			= obj
+ALLCS		= $(shell find $(SRC) -type f -iname "*.c")
+#ALLCSLIBS	= $(shell find $(LIBDIR) -type f -iname "*.c")
+ALLCOBJS	= $(foreach F,$(ALLCS),$(call C2O,$(F)))
+#ALLCOBJSLIBS= $(foreach F,$(ALLCSLIBS),$(call CL2O,$(F)))
+SUBDIRS 	= $(shell find $(SRC) -type d)
+OBJSUBDIRS	= $(patsubst $(SRC)%,$(OBJ)%,$(SUBDIRS))
+#LIBPRINTF	= $(SRC)/printf/ft_printf.h
+#MAIN		= main.c
+#LIBDIR		= lib
+#LIBS		= $(LIBDIR)//libft/libft.a
+#INCDIRS		= -I$(SRC) -I$(LIBDIR)
 
-OBJB=	${BONUS:.c=.o}
+################################################################################
+### RULES
+################################################################################
 
-all:	${NAME}
+# Entrada por defecto
+all			:	$(NAME)
 
-${NAME}:	${OBJ} libft.h
-	ar rc ${NAME} ${OBJ}
-	ranlib ${NAME}
+# Genera get_next_line
+$(NAME)		:	$(OBJSUBDIRS) $(ALLCOBJS)
+	ar $(ARFLAGS) $(NAME) $(ALLCOBJS)
+	ranlib $(NAME)
 
-bonus:		${OBJ} ${OBJB} libft.h
-	ar rc ${NAME} ${OBJ} ${OBJB}
-	ranlib ${NAME}
+# Generate rules for all objects
+$(foreach F,$(ALLCS), $(eval $(call COMPILER,$(C),$(call C2O,$(F)),$(F),$(CFLAGS))))
+#$(foreach F,$(ALLCSLIBS), $(eval $(call COMPILER,$(C),$(call CL2O,$(F)),$(F),$(CFLAGS))))
 
+# Compila librerias
+#$(LIBS)		:
+#	$(MAKE) -C $(LIBDIR)/libft
 
-clean:
-	rm -f ${OBJ} ${OBJB}
+# clean librerias
+#libs-clean:
+#	$(MAKE) -C $(LIBDIR)/libft clean
 
-fclean:		clean
-			rm -f ${NAME}
+# fclean librerias
+#libs-fclean:
+#	$(MAKE) -C $(LIBDIR)/libft fclean
 
-re: fclean all
+# Crea arbol de carpetas
+$(OBJSUBDIRS):
+	$(MKDIR) $(OBJSUBDIRS)
 
-.PHONY: clean fclean all re
+# limpia los .o
+clean		:
+	@rm -f $(ALLCOBJS)
+	@rm -f $(ALLCOBJSLIBS)
+	@rm -f *.gch
+
+# Elimina los .o y el ejecutable
+fclean		: clean
+	@rm -f $(NAME)
+	@rm -f $(NAMEMAIN)
+
+re			: fclean all 
+
+.PHONY		: LIBS clean fclean re

@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search_key_ev.c                                    :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dalba-de <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/27 12:53:06 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/27 12:53:07 by dalba-de         ###   ########.fr       */
+/*   Created: 2019/11/12 12:40:36 by dalba-de          #+#    #+#             */
+/*   Updated: 2019/11/18 11:07:30 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-char	*search_key_ev(char	***ev, char *key)
+void	ft_bzero(void *str, size_t n)
 {
-	int	cont;
+	char	*c;
+	size_t	i;
 
-	cont = 0;
-	while (ev[cont])
+	c = (char*)str;
+	if (n != 0)
 	{
-		if (ft_strncmp(ev[cont][0], key, ft_strlen(ev[cont][0])) == 0)
-			return (ft_strdup(ev[cont][1]));
-		cont++;
+		i = 0;
+		while (i < n)
+		{
+			c[i] = '\0';
+			i++;
+		}
 	}
-	return (NULL);
 }

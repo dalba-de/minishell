@@ -11,7 +11,7 @@
 # define EXIT 6
 # define HELP 7
 # include <get_next_line/src/get_next_line.h>
-# include <libft/libft.h>
+# include <libft/src/libft.h>
 # include <stdio.h>
 # include <errno.h>
 # include <limits.h>

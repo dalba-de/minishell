@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search_key_ev.c                                    :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dalba-de <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/27 12:53:06 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/27 12:53:07 by dalba-de         ###   ########.fr       */
+/*   Created: 2019/11/12 15:18:12 by dalba-de          #+#    #+#             */
+/*   Updated: 2019/11/18 13:06:10 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-char	*search_key_ev(char	***ev, char *key)
+void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	int	cont;
+	t_list *aux;
 
-	cont = 0;
-	while (ev[cont])
+	aux = *alst;
+	if (aux == NULL)
+		*alst = new;
+	else
 	{
-		if (ft_strncmp(ev[cont][0], key, ft_strlen(ev[cont][0])) == 0)
-			return (ft_strdup(ev[cont][1]));
-		cont++;
+		while (aux->next != NULL)
+			aux = aux->next;
+		aux->next = new;
 	}
-	return (NULL);
 }

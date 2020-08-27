@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search_key_ev.c                                    :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/27 12:53:06 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/27 12:53:07 by dalba-de         ###   ########.fr       */
+/*   Created: 2019/11/12 15:17:02 by dalba-de          #+#    #+#             */
+/*   Updated: 2019/11/12 15:58:55 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-char	*search_key_ev(char	***ev, char *key)
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
-	int	cont;
-
-	cont = 0;
-	while (ev[cont])
-	{
-		if (ft_strncmp(ev[cont][0], key, ft_strlen(ev[cont][0])) == 0)
-			return (ft_strdup(ev[cont][1]));
-		cont++;
-	}
-	return (NULL);
+	del(lst->content);
+	free(lst);
 }

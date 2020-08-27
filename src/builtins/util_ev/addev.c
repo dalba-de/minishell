@@ -31,9 +31,10 @@ void	addev(t_mini *all, char *key, char *value)
 	arr[cont] = malloc(sizeof(char *) * (2));
 	arr[cont][0] = ft_strdup(key);
 	arr[cont][1] = ft_strdup(value);
-	arr[cont + 1] = malloc(sizeof(char *) * (2));
+	arr[cont + 1] = NULL;
+	/*arr[cont + 1] = malloc(sizeof(char *) * (2));
 	arr[cont + 1][0] = NULL;
 	arr[cont + 1][1] = NULL;
-	freecer(all->ev, len + 2);
+	freecer(all->ev, len + 2);*/
 	all->ev = arr;
 }
