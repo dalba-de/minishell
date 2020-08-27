@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 19:30:01 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/26 20:00:38 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/08/27 12:31:25 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,24 @@ int	check_slash(char *cmd)
 
 int	try_exec(t_mini *all)
 {
+	int rd;
+
 	all->cmd = (char *)malloc(sizeof(char) * 100);
 	ft_strncpy(all->cmd, all->my_argv[0], ft_strlen(all->my_argv[0]));
 	ft_strncat(all->cmd, "\0", 1);
-	if (!(check_slash(all->cmd)))
+	if ((rd = check_own_cmd(all->cmd)) != 0)
+		bridge_own_cmd(rd, all);
+	else
 	{
-		if (attach_path(all, all->cmd) == 0)
-			call_execve(all->cmd, all);
-		else
+		if (!(check_slash(all->cmd)))
 		{
-			ft_putstr_fd(all->cmd, 1);
-			ft_putendl_fd(": command not found", 1);
+			if (attach_path(all, all->cmd) == 0)
+				call_execve(all->cmd, all);
+			else
+			{
+				ft_putstr_fd(all->cmd, 1);
+				ft_putendl_fd(": command not found", 1);
+			}
 		}
 	}
 	return (0);

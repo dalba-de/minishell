@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   delev.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/27 12:53:16 by dalba-de          #+#    #+#             */
+/*   Updated: 2020/08/27 14:22:28 by dalba-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	delev(t_mini *all, char *key)
@@ -11,7 +23,7 @@ void	delev(t_mini *all, char *key)
 	arr = malloc(sizeof(char *) * (len));
 	cont1 = 0;
 	cont2 = 0;
-	while (all->ev[cont1 + cont2][0])
+	while (all->ev[cont1 + cont2])
 	{
 		if (ft_strncmp(all->ev[cont1 + cont2][0], key, ft_strlen(all->ev[cont1 + cont2][0])) != 0)
 		{
@@ -23,9 +35,7 @@ void	delev(t_mini *all, char *key)
 		else
 			cont2++;
 	}
-	arr[cont1 + 1] = malloc(sizeof(char *) * (2));
-	arr[cont1 + 1][0] = NULL;
-	arr[cont1 + 1][1] = NULL;
+	arr[cont1] = NULL;
 	freecer(all->ev, len);
 	all->ev = arr;
 }

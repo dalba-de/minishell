@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search_key_ev.c                                    :+:      :+:    :+:   */
+/*   changeev.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/27 12:53:06 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/27 12:53:07 by dalba-de         ###   ########.fr       */
+/*   Created: 2020/08/27 13:07:06 by dalba-de          #+#    #+#             */
+/*   Updated: 2020/08/27 13:13:04 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*search_key_ev(char	***ev, char *key)
+void	change_ev(t_mini *all, char *key, char *value)
 {
-	int	cont;
+	int i;
 
-	cont = 0;
-	while (ev[cont][0])
+	i = 0;
+	while(all->ev[i][0])
 	{
-		if (ft_strncmp(ev[cont][0], key, ft_strlen(ev[cont][0])) == 0)
-			return (ft_strdup(ev[cont][1]));
-		cont++;
+		if (ft_strncmp(all->ev[i][0], key, ft_strlen(all->ev[i][0])) == 0)
+			all->ev[i][1] = value;
+		i++;
 	}
-	return (NULL);
 }

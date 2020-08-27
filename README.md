@@ -1,5 +1,12 @@
 # Minishell
 
+### TO DO
+* Pendiente de arreglar "" y '' cuando llamo a execve.
+* Pendiente más de un unset.
+* Pendiente de terminar FT_EXPORT.
+* Pendiente FT_ECHO.
+
+
 ### Resources
 * [Como colaborar en un proyecto en Gihub](https://gist.github.com/BCasal/026e4c7f5c71418485c1)
 * [Making your own Linux Shell in C](https://www.geeksforgeeks.org/making-linux-shell-c/)
