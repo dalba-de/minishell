@@ -15,7 +15,6 @@ void	freecer(char ***ev, int len)
 	while (cont < len)
 	{
 		free(ev[cont]);
-		//free(ev[cont]); Porque freezeas dos veces el mismo punto?
 		cont++;
 	}
 	free(ev);

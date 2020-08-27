@@ -70,7 +70,7 @@ int	try_exec(t_mini *all)
 	all->cmd = (char *)malloc(sizeof(char) * 100);
 	ft_strncpy(all->cmd, all->my_argv[0], ft_strlen(all->my_argv[0]));
 	ft_strncat(all->cmd, "\0", 1);
-	if ((rd = check_own_cmd(all->cmd)) != 0)
+	if ((rd = check_own_cmd(all->cmd)) != -1)
 		bridge_own_cmd(rd, all);
 	else
 	{

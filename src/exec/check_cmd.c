@@ -37,5 +37,5 @@ int		check_own_cmd(char *cmd)
 			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }

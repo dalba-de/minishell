@@ -49,20 +49,24 @@ void	fill_argv(char *tmp_argv, t_mini *all);
 int		try_exec(t_mini *all);
 int		check_own_cmd(char *cmd);
 void	bridge_own_cmd(int index, t_mini *all);
-void	ft_exit(t_mini *all);
-void	change_ev(t_mini *all, char *key, char *value);
-void	delev(t_mini *all, char *key);
 /*
 ** ---------------------utilev------------------
 */
+char	*search_key_ev(char	***ev, char *key);
+void	change_ev(t_mini *all, char *key, char *value);
+void	addev(t_mini *all, char *key, char *value);
+void	delev(t_mini *all, char *key);
 void	freecer(char ***ev, int len);
 int		count_line(char ***envp);
 /*
 ** ---------------------builtins------------------
 */
-void	ft_pwd();
+void	ft_echo(t_mini *all);
 void	ft_cd(t_mini *all);
-void	ft_env(t_mini *all);
+void	ft_pwd();
+void	ft_export(t_mini *all);
 void	ft_unset(t_mini *all);
+void	ft_env(t_mini *all);
+void	ft_exit(t_mini *all);
 
 #endif

@@ -96,9 +96,8 @@ char		***loadev(char **envp)
 		}
 		cont++;
 	}
-	arr[cont] = NULL;
-	/*arr[cont] = malloc(sizeof(char *) * (2));
+	arr[cont] = malloc(sizeof(char *) * (2));
 	arr[cont][0] = NULL;
-	arr[cont][1] = NULL;*/
+	arr[cont][1] = NULL;
 	return (arr);
 }

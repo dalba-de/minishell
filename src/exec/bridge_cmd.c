@@ -14,10 +14,14 @@
 
 void	bridge_own_cmd(int index, t_mini *all)
 {
-	if (index == CD)
+	if (index == ECHO)
+		ft_echo(all);
+	else if (index == CD)
 		ft_cd(all);
 	else if (index == PWD)
 		ft_pwd();
+	else if (index == EXPORT)
+		ft_export(all);
 	else if (index == UNSET)
 		ft_unset(all);
 	else if (index == ENV)
