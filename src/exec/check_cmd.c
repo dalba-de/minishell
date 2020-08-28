@@ -15,14 +15,14 @@
 void	fill_cmds(char **list_cmds)
 {
 	list_cmds[0] = "invalid";
-	list_cmds[1] = "cd";
-	list_cmds[2] = "pwd";
-	list_cmds[3] = "export";
-	list_cmds[4] = "unset";
-	list_cmds[5] = "env";
-	list_cmds[6] = "exit";
-	list_cmds[7] = "help";
-	list_cmds[8] = "echo";
+	list_cmds[ECHO] = "echo";
+	list_cmds[CD] = "cd";
+	list_cmds[PWD] = "pwd";
+	list_cmds[EXPORT] = "export";
+	list_cmds[UNSET] = "unset";
+	list_cmds[ENV] = "env";
+	list_cmds[EXIT] = "exit";
+	list_cmds[HELP] = "help";
 }
 
 int		check_own_cmd(char *cmd)
