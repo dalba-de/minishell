@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:45:11 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/27 12:04:29 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/08/28 13:10:33 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init(t_mini *all, char **envp)
 	ft_bzero(all, sizeof(all));
 	all->path_str = (char *)malloc(sizeof(char) * 256);
 	all->env = envp;
+	*all->my_argv = NULL;
 	all->ev = loadev(envp);
 	get_path_string(all->ev, all->path_str);
 	insert_path_str_to_search(all->path_str, all);

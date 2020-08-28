@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 12:44:40 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/27 13:25:06 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/08/28 11:36:56 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,17 @@ void	ft_cd(t_mini *all)
 	char value[1024];
 
 	getcwd(oldvalue, sizeof(oldvalue));
-	change_ev(all, "OLDPWD", oldvalue);
 	if (chdir(all->my_argv[1]) == -1)
 	{
-		ft_putstr_fd("cd : ", 1);
-		ft_putstr_fd(strerror(errno), 1);
-		ft_putstr_fd(": ", 1);
-		ft_putendl_fd(all->my_argv[1], 1);
-	}	
-	getcwd(value, sizeof(value));
-	change_ev(all, "PWD", value);
+		ft_putstr_fd("cd : ", STDERR_FILENO);
+		ft_putstr_fd(strerror(errno), STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
+		ft_putendl_fd(all->my_argv[1], STDERR_FILENO);
+	}
+	else
+	{
+		change_ev(all, "OLDPWD", oldvalue);
+		getcwd(value, sizeof(value));
+		change_ev(all, "PWD", value);
+	}
 }

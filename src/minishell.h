@@ -2,7 +2,6 @@
 # define MINISHELL_H
 # define PIPE '|'
 # define COMMA ';'
-# define ECHO 0
 # define CD 1
 # define PWD 2
 # define EXPORT 3
@@ -10,6 +9,7 @@
 # define ENV 5
 # define EXIT 6
 # define HELP 7
+# define ECHO 8
 # include <get_next_line/src/get_next_line.h>
 # include <libft/src/libft.h>
 # include <stdio.h>
@@ -25,8 +25,6 @@
 # include <string.h>
 # include <signal.h>
 
-extern int errno;
-
 typedef struct	s_mini
 {
 	int			pipe_flag;
@@ -39,6 +37,12 @@ typedef struct	s_mini
 	char		*search_path[10];
 	char 		*my_argv[100];
 	char		*cmd;
+	int			status;
+	pid_t		pid;
+	int			exit_status;
+	int			rd;
+	int			fd;
+	char		*original_str;
 }				t_mini;
 
 char	***loadev(char **envp);
