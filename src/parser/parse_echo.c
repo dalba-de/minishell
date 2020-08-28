@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 19:46:26 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/28 19:48:15 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/08/28 20:02:50 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,21 +86,20 @@ void	parse_echo_argv(t_mini *all, char *ret, int index)
 		{
 			i++;
 			parse_double_quotes(all, ret, index, &i);
-			index++;
 		}
 		else if (ret[i] == '\'')
 		{
 			i++;
 			parse_single_quotes(all, ret, index, &i);
-			index++;
 		}
 		else if (ret[i] == ' ')
-			i++;
-		else
 		{
-			parse_no_quotes(all, ret, index, &i);
-			index++;
+			i++;
+			index--;
 		}
+		else
+			parse_no_quotes(all, ret, index, &i);
+		index++;
 	}
 	all->my_argv[index] = NULL;
 }

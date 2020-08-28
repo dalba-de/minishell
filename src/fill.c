@@ -6,67 +6,27 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:14:53 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/28 19:48:40 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/08/28 20:21:10 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*delete_quotes(char *ret)
-{
-	unsigned int		i;
-	int		j;
-	char	*aux;
-	char	*original;
-	int		flag;
-
-	original = ret;
-	i = 0;
-	j = 0;
-	flag = 0;
-	aux = malloc(sizeof(char * ) * (ft_strlen(ret) + 1));
-	while(ret[i])
-	{
-		if (ret[i] == '\'')
-		{
-			i++;
-			while (ret[i] != '\'' && ret[i])
-			{
-				aux[j++] = ret[i++];
-				if (i == ft_strlen(ret) && ret[i] != '\'')
-					flag = 1;
-			}	
-		}
-		else if (ret[i] == '\"')
-		{
-			i++;
-			while (ret[i] != '\"' && ret[i])
-			{
-				aux[j++] = ret[i++];
-				if (i == ft_strlen(ret) && ret[i] != '\"')
-					flag = 1;
-			}	
-		}
-		else
-			aux[j++] = ret[i];
-		i++;
-	}
-	aux[j] = '\0';
-	if (flag)
-		aux = original;
-	return (aux);
-}
-
 void	fill_my_argv(t_mini *all, int index, char *ret)
 {
-	char *aux;
+	char	*aux;
+	int		i;
 
-	all->my_argv[index] = (char *)malloc(sizeof(char) * ft_strlen(ret) + 1);
-	aux = delete_quotes(ret);
-	all->my_argv[index] = ft_strncpy(all->my_argv[index], aux, ft_strlen(aux));
-	all->my_argv[index] = ft_strncat(all->my_argv[index], "\0", 1);
-	index++;
-	all->my_argv[index] = '\0';
+	i = 0;
+	if (ret[i] != '\0')
+	{
+		all->my_argv[index] = (char *)malloc(sizeof(char) * ft_strlen(ret) + 1);
+		aux = delete_quotes(ret);
+		all->my_argv[index] = ft_strncpy(all->my_argv[index], aux, ft_strlen(aux));
+		all->my_argv[index] = ft_strncat(all->my_argv[index], "\0", 1);
+		index++;
+		all->my_argv[index] = '\0';
+	}
 }
 
 int		fill_gap(t_mini *all, char *ret, int index)
@@ -95,6 +55,7 @@ void	fill_argv(char *tmp_argv, t_mini *all)
 	foo = tmp_argv;
 	index = 0;
 	ft_bzero(ret, 100);
+	ft_bzero(all->my_argv, 100);
 	while (*foo != '\0')
 	{
 		if (index == 10)
