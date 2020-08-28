@@ -2,14 +2,14 @@
 # define MINISHELL_H
 # define PIPE '|'
 # define COMMA ';'
-# define CD 1
-# define PWD 2
-# define EXPORT 3
-# define UNSET 4
-# define ENV 5
-# define EXIT 6
-# define HELP 7
-# define ECHO 8
+# define ECHO 1
+# define CD 2
+# define PWD 3
+# define EXPORT 4
+# define UNSET 5
+# define ENV 6
+# define EXIT 7
+# define HELP 8
 # include <get_next_line/src/get_next_line.h>
 # include <libft/src/libft.h>
 # include <stdio.h>
