@@ -8,7 +8,9 @@ void	ft_echo(t_mini *all)
 	cont = 1;
 	while (all->my_argv[cont])
 	{
-		if (all->my_argv[cont][0] == '$')
+		if (all->my_argv[cont][0] == '$' && all->my_argv[cont][1] == '?')
+			ft_putnbr_fd(all->exit_status, 1);
+		else if (all->my_argv[cont][0] == '$')
 		{
 			if ((arr = search_key_ev(all->ev, ++all->my_argv[cont])) != NULL)
 			{
