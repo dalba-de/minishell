@@ -23,7 +23,7 @@ void	init(t_mini *all, char **envp)
 	ft_bzero(all, sizeof(all));
 	all->path_str = (char *)malloc(sizeof(char) * 256);
 	all->env = envp;
-	*all->my_argv = NULL;
+	ft_bzero(all->my_argv, 100);
 	all->ev = loadev(envp);
 	get_path_string(all->ev, all->path_str);
 	insert_path_str_to_search(all->path_str, all);

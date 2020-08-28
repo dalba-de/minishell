@@ -14,5 +14,12 @@
 
 void	ft_unset(t_mini *all)
 {
-	delev(all, all->my_argv[1]);
+	int	cont;
+
+	cont = 1;
+	while (all->my_argv[cont])
+	{
+		delev(all, all->my_argv[cont]);
+		cont++;
+	}
 }

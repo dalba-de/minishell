@@ -12,12 +12,19 @@ int		ft_formatev(t_mini *all, int arg)
 	{
 		if (c == '=')
 			flag = 1;
-		if (!(cont == 0 && (ft_isalpha(c) || c == '_')) || c == '"' ||
+		if ((cont == 0 && !(ft_isalpha(c) || c == '_')) || c == '"' ||
 			c == '\'' || (flag == 0 && c == ' '))
 			return (1);
 		cont++;
 	}
 	return (0);
+}
+
+void print_error_export(t_mini *all, int arg)
+{
+	ft_putstr_fd("-bash: export: `", 1);
+	ft_putstr_fd(all->my_argv[arg], 1);
+	ft_putendl_fd("´':not a valid identifier", 1);
 }
 
 void	ft_export(t_mini *all)
@@ -29,8 +36,13 @@ void	ft_export(t_mini *all)
 	cont = 1;
 	while (all->my_argv[cont])
 	{
+		
 		if (ft_formatev(all, cont))
+		{
+			print_error_export(all, cont);
+			cont++;
 			continue;
+		}
 		if (!search_key_ev(all->ev, arr1 = ft_strcdup(all->my_argv[cont], '=')))
 		{
 			addev(all, arr1, arr2 = ft_strcdupinv(all->my_argv[cont], '='));
