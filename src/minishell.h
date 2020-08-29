@@ -53,11 +53,12 @@ void 	insert_path_str_to_search(char *path_str, t_mini *all);
 void	fill_argv(char *tmp_argv, t_mini *all);
 int		try_exec(t_mini *all);
 int		check_own_cmd(char *cmd);
-void	bridge_own_cmd(int index, t_mini *all);
+int		bridge_own_cmd(int index, t_mini *all);
 void	parse_echo_argv(t_mini *all, char *ret, int index);
 char	*delete_quotes(char *ret);
 void	parse_pipes(char *tmp_argv, t_mini *all);
 int		attach_path(t_mini *all, char *cmd);
+void	not_found(t_mini *all);
 /*
 ** ---------------------utilev------------------
 */
@@ -72,7 +73,7 @@ int		count_line(char ***envp);
 */
 void	ft_echo(t_mini *all);
 void	ft_cd(t_mini *all);
-void	ft_pwd();
+void	ft_pwd(t_mini *all);
 void	ft_export(t_mini *all);
 void	ft_unset(t_mini *all);
 void	ft_env(t_mini *all);

@@ -25,6 +25,7 @@ void print_error_export(t_mini *all, int arg)
 	ft_putstr_fd("-bash: export: `", 1);
 	ft_putstr_fd(all->my_argv[arg], 1);
 	ft_putendl_fd("´':not a valid identifier", 1);
+	all->exit_status = 1;
 }
 
 void	ft_export(t_mini *all)
@@ -47,6 +48,7 @@ void	ft_export(t_mini *all)
 		{
 			addev(all, arr1, arr2 = ft_strcdupinv(all->my_argv[cont], '='));
 			free(arr2);
+			all->exit_status = 0;
 		}
 		free(arr1);
 		cont++;

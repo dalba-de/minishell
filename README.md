@@ -16,6 +16,8 @@
 * Arreglado problema con \n.
 * Ahora los comandos funcionan con comillas simples y dobles.
 * '$?' funcionante con execve.
+* cd $HOME ahora funciona.
+* '$?' funcionante con echo, pwd, exit, cd y export. (no necesario en unset)
 
 ### Resources
 * [Como colaborar en un proyecto en Gihub](https://gist.github.com/BCasal/026e4c7f5c71418485c1)

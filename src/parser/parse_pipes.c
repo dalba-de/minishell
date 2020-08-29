@@ -6,17 +6,18 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:43:21 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/29 14:12:18 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/08/29 23:10:14 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	loop_pipe(char ***cmd, char **env)
+void	loop_pipe(char ***cmd, char **env, t_mini *all)
 {
 	int		p[2];
 	pid_t	pid;
 	int		fd_in;
+	int		i;
 
 	fd_in = 0;
 	while (*cmd != NULL)
@@ -28,8 +29,15 @@ void	loop_pipe(char ***cmd, char **env)
 			if (*(cmd + 1) != NULL)
 				dup2(p[1], 1);
 			close(p[0]);
-			execve((*cmd)[0], *cmd, env);
-			exit(EXIT_FAILURE);
+			i = execve((*cmd)[0], *cmd, env);
+			i = bridge_own_cmd(check_own_cmd((*cmd)[0]), all);
+			if (i == 0)
+			{
+				ft_putstr_fd((*cmd)[0], 1);
+				ft_putendl_fd(": command not found", 1);
+				exit(127);
+			}
+			exit(EXIT_SUCCESS);
 		}
 		else
 		{
@@ -98,5 +106,5 @@ void	parse_pipes(char *tmp_argv, t_mini *all)
 	}
 	cmd[i] = NULL;
 	fixed_cmd(cmd, all);
-	loop_pipe(cmd, all->env);
+	loop_pipe(cmd, all->env, all);
 }
