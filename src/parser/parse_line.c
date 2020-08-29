@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:43:55 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/27 12:12:54 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/08/29 12:30:44 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	check_pipes(char *line, t_mini *all)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == PIPE || line[i] == COMMA || line[i] == '\0')
+		if (line[i] == COMMA || line[i] == '\0')
 		{
 			all->pipe_flag = 1;
 			separate_lines(all, i, ret, line);

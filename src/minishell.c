@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:45:11 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/28 20:33:56 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/08/29 12:53:28 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	init(t_mini *all, char **envp)
 	ft_bzero(all->my_argv, 100);
 	all->ev = loadev(envp);
 	all->exit_status = 0;
+	all->piping = 0;
 	get_path_string(all->ev, all->path_str);
 	insert_path_str_to_search(all->path_str, all);
 }
@@ -50,8 +51,9 @@ int		main(int argc, char **argv, char **envp)
 		while (all.lines[i] != NULL)
 		{
 			fill_argv(all.lines[i++], &all);
-			if (all.my_argv[0])
+			if (all.my_argv[0] && !all.piping)
 				try_exec(&all);
+			all.piping = 0;
 		}
 		free(line);
 	}

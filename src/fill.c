@@ -6,11 +6,25 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:14:53 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/28 20:21:10 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/08/29 12:46:00 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int		piping(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == PIPE)
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 void	fill_my_argv(t_mini *all, int index, char *ret)
 {
@@ -52,30 +66,35 @@ void	fill_argv(char *tmp_argv, t_mini *all)
 	int		index;
 	char	ret[100];
 
-	foo = tmp_argv;
-	index = 0;
-	ft_bzero(ret, 100);
-	ft_bzero(all->my_argv, 100);
-	while (*foo != '\0')
+	if (piping(tmp_argv))
+		parse_pipes(tmp_argv, all);	
+	else
 	{
-		if (index == 10)
-			break ;
-		if (*foo == ' ')
+		foo = tmp_argv;
+		index = 0;
+		ft_bzero(ret, 100);
+		ft_bzero(all->my_argv, 100);
+		while (*foo != '\0')
 		{
-			while (*foo == ' ')
-				foo++;
-			if (fill_gap(all, ret, index))
+			if (index == 10)
+				break ;
+			if (*foo == ' ')
 			{
-				ft_strcpy(ret, foo);
-				parse_echo_argv(all, ret, 1);
-				return ;
-			}	
-			index++;
-			foo--;
+				while (*foo == ' ')
+					foo++;
+				if (fill_gap(all, ret, index))
+				{
+					ft_strcpy(ret, foo);
+					parse_echo_argv(all, ret, 1);
+					return ;
+				}	
+				index++;
+				foo--;
+			}
+			else
+				ft_strncat(ret, foo, 1);
+			foo++;
 		}
-		else
-			ft_strncat(ret, foo, 1);
-		foo++;
+		fill_my_argv(all, index, ret);
 	}
-	fill_my_argv(all, index, ret);
 }

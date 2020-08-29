@@ -43,6 +43,7 @@ typedef struct	s_mini
 	int			rd;
 	int			fd;
 	char		*original_str;
+	int			piping;
 }				t_mini;
 
 char	***loadev(char **envp);
@@ -55,6 +56,8 @@ int		check_own_cmd(char *cmd);
 void	bridge_own_cmd(int index, t_mini *all);
 void	parse_echo_argv(t_mini *all, char *ret, int index);
 char	*delete_quotes(char *ret);
+void	parse_pipes(char *tmp_argv, t_mini *all);
+int		attach_path(t_mini *all, char *cmd);
 /*
 ** ---------------------utilev------------------
 */

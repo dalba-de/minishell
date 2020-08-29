@@ -6,15 +6,11 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:33:28 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/27 14:21:05 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/08/29 13:15:22 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
-
-
 
 static int	count_line_envp(char **envp)
 {
