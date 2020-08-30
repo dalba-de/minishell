@@ -2,7 +2,7 @@
 
 void	ft_echo(t_mini *all)
 {
-	int		cont;
+	/*int		cont;
 	char	*arr;
 	int		nflag;
 
@@ -40,6 +40,53 @@ void	ft_echo(t_mini *all)
 		cont++;
 	}
 	if (ft_strncmp(all->my_argv[1], "-n", 2) != 0)
+		ft_putchar_fd('\n', 1);
+	all->exit_status = 0;*/
+	int i;
+	int j;
+	int	flagn;
+	char *key;
+
+	flagn = 0;
+	i = 0;
+	if (all->my_argv[1][0] == '-' && all->my_argv[1][1] == 'n' && all->my_argv[1][2] == ' ')
+	{
+		flagn = 1;
+		all->my_argv[1] = &all->my_argv[1][3];
+	}
+	while (all->my_argv[1][i])
+	{
+		j = 0;
+		if (all->my_argv[1][i] != '$' && all->my_argv[1][i] != ' ')
+			ft_putchar_fd(all->my_argv[1][i], 1);
+		else if (all->my_argv[1][i] == ' ')
+		{
+			ft_putchar_fd(' ', 1);
+			while (all->my_argv[1][i] == ' ')
+				i++;
+			continue;
+		}
+		else
+		{
+			if (all->my_argv[1][i + 1] == '?')
+			{
+				ft_putnbr_fd(all->exit_status, 1);
+				i++;
+			}
+			else
+			{
+				j = i + 1;
+				while (all->my_argv[1][j] != ' ' && all->my_argv[1][j] != '\0' && all->my_argv[1][j] != '$')
+					j++;
+				j--;
+				key = ft_substr(all->my_argv[1], i + 1, j);
+				ft_putstr_fd(search_key_ev(all->ev, key), 1);
+				i += j;
+			}
+		}
+		i++;
+	}
+	if (!flagn)
 		ft_putchar_fd('\n', 1);
 	all->exit_status = 0;
 }
