@@ -44,6 +44,7 @@ typedef struct	s_mini
 	int			fd;
 	char		*original_str;
 	int			piping;
+	char		*strl;
 }				t_mini;
 
 char	***loadev(char **envp);
