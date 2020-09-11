@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 18:37:17 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/11 18:40:37 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/11 18:44:37 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void			parse_pipes(char *tmp_argv, t_mini *all);
 int				attach_path(t_mini *all, char *cmd);
 void			not_found(t_mini *all);
 char			***parse_cmdlist(t_mini *all);
+void			parse_redir(char *tmp_argv, t_mini *all);
 /*
 ** ---------------------utilev------------------
 */
