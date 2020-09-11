@@ -74,6 +74,7 @@ void			parse_pipes(char *tmp_argv, t_mini *all);
 int				attach_path(t_mini *all, char *cmd);
 void			not_found(t_mini *all);
 char			***parse_cmdlist(t_mini *all);
+void			parse_redir(char *tmp_argv, t_mini *all);
 /*
 ** ---------------------utilev------------------
 */
