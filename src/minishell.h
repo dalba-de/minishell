@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 18:16:41 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/11 18:18:32 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/11 18:31:15 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void			parse_pipes(char *tmp_argv, t_mini *all);
 int				attach_path(t_mini *all, char *cmd);
 void			not_found(t_mini *all);
 void			parse_redir(char *tmp_argv, t_mini *all);
+char			***parse_cmdlist(t_mini *all);
 /*
 ** ---------------------utilev------------------
 */
@@ -83,6 +84,11 @@ void			delev(t_mini *all, char *key);
 void			freecer(char ***ev, int len);
 int				count_line(char ***envp);
 char			**env_to_double(char ***env);
+/*
+** ---------------------utilcmdl------------------
+*/
+char			***add_cmdtcmdl(t_mini *all, char **cmd, char ***cmdl);
+char			**add_argtcmd(t_mini *all, char *arg, char **cmd);
 /*
 ** ---------------------builtins------------------
 */

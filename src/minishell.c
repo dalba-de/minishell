@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:45:11 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/11 18:15:20 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/11 18:30:21 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		main(int argc, char **argv, char **envp)
 	char	*line;
 	t_mini	all;
 	int		i;
+	char	***cmdl;
 	int		rd;
 
 	signal(SIGINT, handle_signal);
@@ -49,6 +50,8 @@ int		main(int argc, char **argv, char **envp)
 		rd = get_next_line(STDIN_FILENO, &line);
 		if (rd == 0)
 			break ;
+		all.strl = line;
+		cmdl = parse_cmdlist(&all);
 		check_pipes(line, &all);
 		i = 0;
 		while (all.lines[i] != NULL)

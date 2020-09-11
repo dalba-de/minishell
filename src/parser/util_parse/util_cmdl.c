@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-/*int		ft_cmdlen(char ***cmdl)
+int		ft_cmdlen(char ***cmdl)
 {
 	int	cont;
 
@@ -86,4 +86,50 @@ char	*create_strco1(t_mini *all, int *cont)
 		(*cont)++;
 	all->strl[*cont] == '\'' ? ((*cont)++) : 0;
 	return (str);
-}*/
+}
+
+char	*create_strco2(t_mini *all, int *cont)
+{
+	char	*str;
+	
+	(*cont)++;
+	str = ft_strcdup(all->strl[*cont], '"');
+	while (all->strl[*cont] || all->strl[*cont] != '"')
+		(*cont)++;
+	all->strl[*cont] == '"' ? ((*cont)++) : 0;
+	return (str);
+}
+
+static	int		is_pipe(char c)
+{
+	if (c == '<' || c == '>' || c == '|')
+		return (1);
+	return (0);
+}
+
+static	int		is_final_arg(char c)
+{
+	if (c == ' ' || c == ';' || c == '"' || c == '\'' || is_pipe(c))
+		return (1);
+	return (0);
+}
+
+char	*create_strtstr(t_mini *all, int *cont, int *flag)
+{
+	char	*str;
+	int		cont2;
+
+	cont2 = 0;
+	if (is_pipe(all->strl[(*cont)]))
+	{
+		flag[0] = 0;
+		cont2++;
+		all->strl[(*cont)] == '>' && all->strl[(*cont) + 1] == '>' ? (cont2++) : (0);
+	}
+	else
+	{
+		while (all->strl[(*cont) + cont2] && !is_pipe(all->strl[(*cont) + cont2]))
+			cont2++;
+	}
+	return (str = ft_substr(all->strl, *cont, cont2));
+}
