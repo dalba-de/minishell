@@ -131,5 +131,7 @@ char	*create_strtstr(t_mini *all, int *cont, int *flag)
 		while (all->strl[(*cont) + cont2] && !is_final_arg(all->strl[(*cont) + cont2]))
 			cont2++;
 	}
-	return (str = ft_substr(all->strl, *cont, cont2));
+	str = ft_substr(all->strl, *cont, cont2);
+	*cont = cont2 + *cont;
+	return (str);
 }
