@@ -65,7 +65,7 @@ char	**add_argtcmd(t_mini *all, char *arg, char **cmd)
 
 char		*add_strtarg(t_mini *all, char *str, char *arg)
 {
-	char	result;
+	char	*result;
 
 	if (arg == NULL)
 		return (str);
@@ -81,7 +81,7 @@ char	*create_strco1(t_mini *all, int *cont)
 	char	*str;
 	
 	(*cont)++;
-	str = ft_strcdup(all->strl[*cont], '\'');
+	str = ft_strcdup(&all->strl[*cont], '\'');
 	while (all->strl[*cont] || all->strl[*cont] != '\'')
 		(*cont)++;
 	all->strl[*cont] == '\'' ? ((*cont)++) : 0;
@@ -93,7 +93,7 @@ char	*create_strco2(t_mini *all, int *cont)
 	char	*str;
 	
 	(*cont)++;
-	str = ft_strcdup(all->strl[*cont], '"');
+	str = ft_strcdup(&all->strl[*cont], '"');
 	while (all->strl[*cont] || all->strl[*cont] != '"')
 		(*cont)++;
 	all->strl[*cont] == '"' ? ((*cont)++) : 0;
@@ -128,7 +128,7 @@ char	*create_strtstr(t_mini *all, int *cont, int *flag)
 	}
 	else
 	{
-		while (all->strl[(*cont) + cont2] && !is_pipe(all->strl[(*cont) + cont2]))
+		while (all->strl[(*cont) + cont2] && !is_final_arg(all->strl[(*cont) + cont2]))
 			cont2++;
 	}
 	return (str = ft_substr(all->strl, *cont, cont2));
