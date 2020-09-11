@@ -6,13 +6,13 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:43:21 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/29 23:10:14 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/09 17:03:23 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	loop_pipe(char ***cmd, char **env, t_mini *all)
+void	loop_pipe(char ***cmd, t_mini *all)
 {
 	int		p[2];
 	pid_t	pid;
@@ -20,6 +20,7 @@ void	loop_pipe(char ***cmd, char **env, t_mini *all)
 	int		i;
 
 	fd_in = 0;
+	i = 0;
 	while (*cmd != NULL)
 	{
 		pipe(p);
@@ -29,14 +30,12 @@ void	loop_pipe(char ***cmd, char **env, t_mini *all)
 			if (*(cmd + 1) != NULL)
 				dup2(p[1], 1);
 			close(p[0]);
-			i = execve((*cmd)[0], *cmd, env);
-			i = bridge_own_cmd(check_own_cmd((*cmd)[0]), all);
-			if (i == 0)
+			while ((*cmd)[i] != NULL)
 			{
-				ft_putstr_fd((*cmd)[0], 1);
-				ft_putendl_fd(": command not found", 1);
-				exit(127);
+				all->my_argv[i] = (*cmd)[i];
+				i++;
 			}
+			try_exec(all);
 			exit(EXIT_SUCCESS);
 		}
 		else
@@ -47,37 +46,6 @@ void	loop_pipe(char ***cmd, char **env, t_mini *all)
 			cmd++;
 		}
 	}
-}
-
-void	attach_pipe(char ***cmd, t_mini *all)
-{
-	int i;
-
-	i = 0;
-	while (cmd[i] != NULL)
-	{
-		attach_path(all, cmd[i][0]);
-		i++;
-	}
-}
-
-void	fixed_cmd(char ***cmd, t_mini *all)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (cmd[i] != NULL)
-	{
-		j = 0;
-		while (cmd[i][j] != NULL)
-		{
-			cmd[i][j] = delete_quotes(cmd[i][j]);
-			j++;
-		}
-		i++;
-	}
-	attach_pipe(cmd, all);
 }
 
 void	parse_pipes(char *tmp_argv, t_mini *all)
@@ -105,6 +73,5 @@ void	parse_pipes(char *tmp_argv, t_mini *all)
 		i++;
 	}
 	cmd[i] = NULL;
-	fixed_cmd(cmd, all);
-	loop_pipe(cmd, all->env, all);
+	loop_pipe(cmd, all);
 }

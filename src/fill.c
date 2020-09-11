@@ -6,11 +6,25 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:14:53 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/29 12:46:00 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/09 17:10:22 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int   redir(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '>' || str[i] == '<')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 int		piping(char *str)
 {
@@ -67,7 +81,9 @@ void	fill_argv(char *tmp_argv, t_mini *all)
 	char	ret[100];
 
 	if (piping(tmp_argv))
-		parse_pipes(tmp_argv, all);	
+		parse_pipes(tmp_argv, all);
+	else if (redir(tmp_argv))
+    	parse_redir(tmp_argv, all);
 	else
 	{
 		foo = tmp_argv;
