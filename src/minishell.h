@@ -44,6 +44,7 @@ typedef struct	s_mini
 	int			fd;
 	char		*original_str;
 	int			piping;
+	int     	double_redir;
 	char		*strl;
 }				t_mini;
 
@@ -60,7 +61,11 @@ char	*delete_quotes(char *ret);
 void	parse_pipes(char *tmp_argv, t_mini *all);
 int		attach_path(t_mini *all, char *cmd);
 void	not_found(t_mini *all);
+<<<<<<< HEAD
 char	***parse_cmdlist(t_mini *all);
+=======
+void  	parse_redir(char *tmp_argv, t_mini *all);
+>>>>>>> 37b25a5c30ffb41cff932ace94721ea7fbd5ec18
 /*
 ** ---------------------utilev------------------
 */

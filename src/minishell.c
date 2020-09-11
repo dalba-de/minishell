@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:45:11 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/29 12:53:28 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/09 17:13:57 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	init(t_mini *all, char **envp)
 	all->ev = loadev(envp);
 	all->exit_status = 0;
 	all->piping = 0;
+	all->double_redir = 0;
 	get_path_string(all->ev, all->path_str);
 	insert_path_str_to_search(all->path_str, all);
 }
@@ -37,7 +38,7 @@ int		main(int argc, char **argv, char **envp)
 	t_mini	all;
 	int		i;
 	char	***cmdl;
-
+	int		rd;
 	(void)argc;
 	(void)argv;
 	signal(SIGINT, handle_signal);
@@ -45,8 +46,10 @@ int		main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		all.start = 0;
-		ft_putstr_fd("\033[31mMinishell>> \033[0m", 1);
-		get_next_line(STDIN_FILENO, &line);
+		ft_putstr_fd("\033[31mMinishell>> \033[0m", STDERR_FILENO);
+		rd = get_next_line(STDIN_FILENO, &line);
+		if (rd == 0)
+			break ;
 		all.strl = line;
 		cmdl = parse_cmdlist(&all);
 		check_pipes(line, &all);
