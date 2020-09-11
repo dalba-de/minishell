@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/11 18:16:41 by dalba-de          #+#    #+#             */
+/*   Updated: 2020/09/11 18:18:32 by dalba-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # define PIPE '|'
@@ -32,10 +44,9 @@ typedef struct	s_mini
 	char		*input;
 	int			start;
 	char		***ev;
-	char		**env;
 	char		*path_str;
 	char		*search_path[10];
-	char 		*my_argv[100];
+	char		*my_argv[100];
 	char		*cmd;
 	int			status;
 	pid_t		pid;
@@ -44,42 +55,43 @@ typedef struct	s_mini
 	int			fd;
 	char		*original_str;
 	int			piping;
-	int     	double_redir;
+	int			double_redir;
 	char		*strl;
 }				t_mini;
 
-char	***loadev(char **envp);
-void	check_pipes(char *line, t_mini *all);
-void	get_path_string(char ***tmp_envp, char *bin_path);
-void 	insert_path_str_to_search(char *path_str, t_mini *all);
-void	fill_argv(char *tmp_argv, t_mini *all);
-int		try_exec(t_mini *all);
-int		check_own_cmd(char *cmd);
-int		bridge_own_cmd(int index, t_mini *all);
-void	parse_echo_argv(t_mini *all, char *ret, int index);
-char	*delete_quotes(char *ret);
-void	parse_pipes(char *tmp_argv, t_mini *all);
-int		attach_path(t_mini *all, char *cmd);
-void	not_found(t_mini *all);
-void  	parse_redir(char *tmp_argv, t_mini *all);
+char			***loadev(char **envp);
+void			check_pipes(char *line, t_mini *all);
+void			get_path_string(char ***tmp_envp, char *bin_path);
+void			insert_path_str_to_search(char *path_str, t_mini *all);
+void			fill_argv(char *tmp_argv, t_mini *all);
+int				try_exec(t_mini *all);
+int				check_own_cmd(char *cmd);
+int				bridge_own_cmd(int index, t_mini *all);
+void			parse_echo_argv(t_mini *all, char *ret, int index);
+char			*delete_quotes(char *ret);
+void			parse_pipes(char *tmp_argv, t_mini *all);
+int				attach_path(t_mini *all, char *cmd);
+void			not_found(t_mini *all);
+void			parse_redir(char *tmp_argv, t_mini *all);
 /*
 ** ---------------------utilev------------------
 */
-char	*search_key_ev(char	***ev, char *key);
-void	change_ev(t_mini *all, char *key, char *value);
-void	addev(t_mini *all, char *key, char *value);
-void	delev(t_mini *all, char *key);
-void	freecer(char ***ev, int len);
-int		count_line(char ***envp);
+char			*search_key_ev(char	***ev, char *key);
+void			change_ev(t_mini *all, char *key, char *value);
+void			addev(t_mini *all, char *key, char *value);
+void			delev(t_mini *all, char *key);
+void			freecer(char ***ev, int len);
+int				count_line(char ***envp);
+char			**env_to_double(char ***env);
 /*
 ** ---------------------builtins------------------
 */
-void	ft_echo(t_mini *all);
-void	ft_cd(t_mini *all);
-void	ft_pwd(t_mini *all);
-void	ft_export(t_mini *all);
-void	ft_unset(t_mini *all);
-void	ft_env(t_mini *all);
-void	ft_exit(t_mini *all);
+void			ft_echo(t_mini *all);
+void			ft_cd(t_mini *all);
+void			ft_pwd(t_mini *all);
+void			ft_export(t_mini *all);
+void			ft_unset(t_mini *all);
+void			ft_env(t_mini *all);
+void			ft_exit(t_mini *all);
 
 #endif

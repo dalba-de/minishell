@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 12:48:52 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/30 00:40:03 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/11 18:19:10 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_exit(t_mini *all)
 		all->exit_status = 1;
 		return ;
 	}
-	else if(all->my_argv[1] != NULL)
+	else if (all->my_argv[1] != NULL)
 	{
 		i = 0;
 		while (all->my_argv[1][i])

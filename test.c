@@ -13,14 +13,10 @@
 
 int main()
 {
-	pid_t pid;
-	char *arg[] = {"/bin/echo", "\0", "hola", NULL};
-	char *env[] = {NULL};
+	char *str = "avion";
+	char *str1;
 
-	if ((pid = fork()) == 0)
-	{
-		execve(arg[0], arg, env);
-		exit(EXIT_FAILURE);
-	}
-	return (0);
+	ft_substr(str, 0, 2);
+	printf("%s\n", str1);
+	return 0;
 }

@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int		ft_cmdlen(char ***cmdl)
+/*int		ft_cmdlen(char ***cmdl)
 {
 	int	cont;
 
@@ -68,7 +68,7 @@ char		*add_strtarg(t_mini *all, char *str, char *arg)
 	char	result;
 
 	if (arg == NULL)
-		retrun (str);
+		return (str);
 	if (!(result = ft_strjoin(arg, str)))
 		ft_exit(all);
 	free(str);
@@ -86,4 +86,4 @@ char	*create_strco1(t_mini *all, int *cont)
 		(*cont)++;
 	all->strl[*cont] == '\'' ? ((*cont)++) : 0;
 	return (str);
-}
+}*/

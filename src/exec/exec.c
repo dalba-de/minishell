@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 19:30:01 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/09 16:15:07 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/11 18:01:57 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	call_execve(char *cmd, t_mini *all)
 
 	if ((all->pid = fork()) == 0)
 	{
-		i = execve(cmd, all->my_argv, all->env);
+		i = execve(cmd, all->my_argv, env_to_double(all->ev));
 		if (i < 0)
 		{
 			ft_putstr_fd(all->cmd, 1);

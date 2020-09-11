@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/11 18:20:24 by dalba-de          #+#    #+#             */
+/*   Updated: 2020/09/11 18:21:01 by dalba-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int		ft_formatev(t_mini *all, int arg)
@@ -20,7 +32,7 @@ int		ft_formatev(t_mini *all, int arg)
 	return (0);
 }
 
-void print_error_export(t_mini *all, int arg)
+void	print_error_export(t_mini *all, int arg)
 {
 	ft_putstr_fd("-bash: export: `", 1);
 	ft_putstr_fd(all->my_argv[arg], 1);
@@ -37,7 +49,6 @@ void	ft_export(t_mini *all)
 	cont = 1;
 	while (all->my_argv[cont])
 	{
-		
 		if (ft_formatev(all, cont))
 		{
 			print_error_export(all, cont);

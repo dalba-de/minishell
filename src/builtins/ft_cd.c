@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 12:44:40 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/30 00:15:33 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/11 18:19:56 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	change_value(t_mini *all)
 	char	path[1024];
 	int		i;
 	int		j;
-	
+
 	i = 1;
 	j = 0;
 	while (all->my_argv[1][i] != '\0')

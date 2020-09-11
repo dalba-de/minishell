@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:45:11 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/09 17:13:57 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/11 18:15:20 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ void	handle_signal(int signo)
 	ft_putstr_fd("\n\033[31mMinishell>> \033[0m", 1);
 }
 
-void	init(t_mini *all, char **envp)
+void	init(t_mini *all, char **envp, char **argv, int argc)
 {
+	(void)argc;
+	(void)argv;
 	ft_bzero(all, sizeof(all));
 	all->path_str = (char *)malloc(sizeof(char) * 256);
-	all->env = envp;
 	ft_bzero(all->my_argv, 100);
 	all->ev = loadev(envp);
 	all->exit_status = 0;
@@ -39,10 +40,8 @@ int		main(int argc, char **argv, char **envp)
 	int		i;
 	int		rd;
 
-	(void)argc;
-	(void)argv;
 	signal(SIGINT, handle_signal);
-	init(&all, envp);
+	init(&all, envp, argv, argc);
 	while (1)
 	{
 		all.start = 0;

@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-char	***parse_cmdlist(t_mini *all)
+/*char	***parse_cmdlist(t_mini *all)
 {
 	int	cont[1];
 	char **cmd;
@@ -68,3 +68,4 @@ char	*create_arg(t_mini *all, int *cont)
 	}
 	return (arg);
 }
+*/
