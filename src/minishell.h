@@ -60,6 +60,7 @@ char	*delete_quotes(char *ret);
 void	parse_pipes(char *tmp_argv, t_mini *all);
 int		attach_path(t_mini *all, char *cmd);
 void	not_found(t_mini *all);
+char	***parse_cmdlist(t_mini *all);
 /*
 ** ---------------------utilev------------------
 */
@@ -69,6 +70,11 @@ void	addev(t_mini *all, char *key, char *value);
 void	delev(t_mini *all, char *key);
 void	freecer(char ***ev, int len);
 int		count_line(char ***envp);
+/*
+** ---------------------utilcmdl------------------
+*/
+char	***add_cmdtcmdl(t_mini *all, char **cmd, char ***cmdl);
+char	**add_argtcmd(t_mini *all, char *arg, char **cmd);
 /*
 ** ---------------------builtins------------------
 */

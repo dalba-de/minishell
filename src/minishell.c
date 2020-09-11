@@ -36,6 +36,7 @@ int		main(int argc, char **argv, char **envp)
 	char	*line;
 	t_mini	all;
 	int		i;
+	char	***cmdl;
 
 	(void)argc;
 	(void)argv;
@@ -46,6 +47,8 @@ int		main(int argc, char **argv, char **envp)
 		all.start = 0;
 		ft_putstr_fd("\033[31mMinishell>> \033[0m", 1);
 		get_next_line(STDIN_FILENO, &line);
+		all.strl = line;
+		cmdl = parse_cmdlist(&all);
 		check_pipes(line, &all);
 		i = 0;
 		while (all.lines[i] != NULL)
