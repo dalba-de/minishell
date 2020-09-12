@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 19:30:01 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/11 18:01:57 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/12 01:08:35 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	not_found(t_mini *all)
 	all->exit_status = 127;
 }
 
-void	call_execve(char *cmd, t_mini *all)
+void	call_execve(char *cmd, t_mini *all, char **cmdl)
 {
 	int i;
 
 	if ((all->pid = fork()) == 0)
 	{
-		i = execve(cmd, all->my_argv, env_to_double(all->ev));
+		i = execve(cmd, cmdl, env_to_double(all->ev));
 		if (i < 0)
 		{
 			ft_putstr_fd(all->cmd, 1);
@@ -76,26 +76,26 @@ int		check_slash(char *cmd)
 	return (0);
 }
 
-int		try_exec(t_mini *all)
+int		try_exec(t_mini *all, char **cmdl)
 {
 	all->cmd = (char *)malloc(sizeof(char) * 100);
-	ft_strncpy(all->cmd, all->my_argv[0], ft_strlen(all->my_argv[0]));
+	ft_strncpy(all->cmd, cmdl[0], ft_strlen(cmdl[0]));
 	ft_strncat(all->cmd, "\0", 1);
 	if ((all->rd = check_own_cmd(all->cmd)) != 0)
-		bridge_own_cmd(all->rd, all);
+		bridge_own_cmd(all->rd, all, cmdl);
 	else
 	{
 		if (!(check_slash(all->cmd)))
 		{
 			if (attach_path(all, all->cmd) == 0)
-				call_execve(all->cmd, all);
+				call_execve(all->cmd, all, cmdl);
 		}
 		else
 		{
 			if ((all->fd = open(all->cmd, O_RDONLY)) > 0)
 			{
 				close(all->fd);
-				call_execve(all->cmd, all);
+				call_execve(all->cmd, all, cmdl);
 			}
 			else
 				not_found(all);

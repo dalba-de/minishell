@@ -6,13 +6,13 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 18:20:24 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/11 18:21:01 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/12 01:18:37 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_formatev(t_mini *all, int arg)
+int		ft_formatev(int arg, char **cmdl)
 {
 	int		cont;
 	int		flag;
@@ -20,7 +20,7 @@ int		ft_formatev(t_mini *all, int arg)
 
 	flag = 0;
 	cont = 0;
-	while ((c = all->my_argv[arg][cont]) != '\0')
+	while ((c = cmdl[arg][cont]) != '\0')
 	{
 		if (c == '=')
 			flag = 1;
@@ -40,24 +40,24 @@ void	print_error_export(t_mini *all, int arg)
 	all->exit_status = 1;
 }
 
-void	ft_export(t_mini *all)
+void	ft_export(t_mini *all, char **cmdl)
 {
 	int		cont;
 	char	*arr1;
 	char	*arr2;
 
 	cont = 1;
-	while (all->my_argv[cont])
+	while (cmdl[cont])
 	{
-		if (ft_formatev(all, cont))
+		if (ft_formatev(cont, cmdl))
 		{
 			print_error_export(all, cont);
 			cont++;
 			continue;
 		}
-		if (!search_key_ev(all->ev, arr1 = ft_strcdup(all->my_argv[cont], '=')))
+		if (!search_key_ev(all->ev, arr1 = ft_strcdup(cmdl[cont], '=')))
 		{
-			addev(all, arr1, arr2 = ft_strcdupinv(all->my_argv[cont], '='));
+			addev(all, arr1, arr2 = ft_strcdupinv(cmdl[cont], '='));
 			free(arr2);
 			all->exit_status = 0;
 		}

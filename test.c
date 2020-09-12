@@ -13,10 +13,13 @@
 
 int main()
 {
-	char *str = "avion";
-	char *str1;
+	char *arg[] = {"ls", "-la", NULL};
+	char *env[] = {NULL};
 
-	ft_substr(str, 0, 2);
-	printf("%s\n", str1);
-	return 0;
+	pid_t pid = fork();
+	if (pid == 0)
+	{
+		execve("/bin/ls", arg, env);
+		return (0);
+	}
 }

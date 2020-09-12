@@ -6,37 +6,43 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:43:21 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/09 17:03:23 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/12 02:34:47 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	forking_pipe(t_mini *all, int p[2], int fd_in, char ***cmd)
+{
+	int		i;
+
+	i = 0;
+	dup2(fd_in, 0);
+	if (*(cmd + 1) != NULL)
+		dup2(p[1], 1);
+	close(p[0]);
+	while ((*cmd)[i] != NULL)
+	{
+		all->my_argv[i] = (*cmd)[i];
+		i++;
+	}
+	try_exec(all, all->my_argv);
+	exit(EXIT_SUCCESS);
+}
 
 void	loop_pipe(char ***cmd, t_mini *all)
 {
 	int		p[2];
 	pid_t	pid;
 	int		fd_in;
-	int		i;
 
 	fd_in = 0;
-	i = 0;
 	while (*cmd != NULL)
 	{
 		pipe(p);
 		if ((pid = fork()) == 0)
 		{
-			dup2(fd_in, 0);
-			if (*(cmd + 1) != NULL)
-				dup2(p[1], 1);
-			close(p[0]);
-			while ((*cmd)[i] != NULL)
-			{
-				all->my_argv[i] = (*cmd)[i];
-				i++;
-			}
-			try_exec(all);
-			exit(EXIT_SUCCESS);
+			forking_pipe(all, p, fd_in, cmd);
 		}
 		else
 		{
@@ -48,28 +54,28 @@ void	loop_pipe(char ***cmd, t_mini *all)
 	}
 }
 
-void	parse_pipes(char *tmp_argv, t_mini *all)
+void	parse_pipes(char **cmdl, t_mini *all)
 {
-	char	**tmp;
-	char	**tmp2;
 	char	**cmd[10];
 	int		i;
 	int		j;
+	int		k;
 
-	all->piping = 1;
 	i = 0;
 	j = 0;
-	tmp = ft_split(tmp_argv, PIPE);
-	while (tmp[i] != NULL)
+	while (cmdl[j] != NULL)
 	{
-		tmp2 = ft_split(tmp[i], ' ');
 		cmd[i] = malloc(sizeof(char *) * 4);
-		while (tmp2[j] != NULL)
+		k = 0;
+		if (cmdl[j][0] == PIPE)
+			j++;
+		while (cmdl[j] && cmdl[j][0] != PIPE)
 		{
-			cmd[i][j] = tmp2[j];
+			cmd[i][k] = cmdl[j];
+			k++;
 			j++;
 		}
-		j = 0;
+		cmd[i][k] = NULL;
 		i++;
 	}
 	cmd[i] = NULL;

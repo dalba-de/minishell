@@ -6,20 +6,20 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 13:27:57 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/29 12:18:05 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/12 01:16:20 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_unset(t_mini *all)
+void	ft_unset(t_mini *all, char **cmdl)
 {
 	int	cont;
 
 	cont = 1;
-	while (all->my_argv[cont])
+	while (cmdl[cont])
 	{
-		delev(all, all->my_argv[cont]);
+		delev(all, cmdl[cont]);
 		cont++;
 	}
 }

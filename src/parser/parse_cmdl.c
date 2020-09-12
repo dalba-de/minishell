@@ -9,13 +9,20 @@ static	char	*create_arg(t_mini *all, int *cont)
 	arg = NULL;
 	str = NULL;
 	flag[0] = 1;
+	if (all->strl[*cont] == PIPE || all->strl[*cont] == '>' || all->strl[*cont] == '<')
+	{
+		str = create_strtstr(all, cont, flag);
+		arg = add_strtarg(all, str, arg);
+		return (arg);
+	}	
 	while (all->strl[*cont] && flag[0])
 	{
 		if (all->strl[*cont] == '\'')
 			str = create_strco1(all, cont);
 		else if (all->strl[*cont] == '"')
 			str = create_strco2(all, cont);
-		else if (all->strl[*cont] == ' ' || all->strl[*cont] == ';')
+		else if (all->strl[*cont] == ' ' || all->strl[*cont] == ';' || all->strl[*cont] == '|'
+		|| all->strl[*cont] == '>' || all->strl[*cont] == '<')
 			break ;
 		else
 			str = create_strtstr(all, cont, flag);
@@ -59,7 +66,7 @@ char	***parse_cmdlist(t_mini *all)
 			cmd = create_cmd(all, cont);
 			cmdl = add_cmdtcmdl(all, cmd, cmdl);
 		}
-		all->strl[*cont] ? (0) : ((*cont)++);
+		all->strl[*cont] == '\0' ? (0) : ((*cont)++);
 	}
 	return (cmdl);
 }

@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:45:11 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/11 18:41:09 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/12 02:36:53 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,18 @@ int		main(int argc, char **argv, char **envp)
 	init(&all, envp, argv, argc);
 	while (1)
 	{
-		all.start = 0;
 		ft_putstr_fd("\033[31mMinishell>> \033[0m", STDERR_FILENO);
 		rd = get_next_line(STDIN_FILENO, &line);
 		if (rd == 0)
 			break ;
 		all.strl = line;
 		cmdl = parse_cmdlist(&all);
-		check_pipes(line, &all);
+		if (cmdl == NULL)
+			continue ;
 		i = 0;
-		while (all.lines[i] != NULL)
-		{
-			fill_argv(all.lines[i++], &all);
-			if (all.my_argv[0] && !all.piping)
-				try_exec(&all);
-			all.piping = 0;
-		}
+		while (cmdl[i] != NULL)
+			fill_argv(cmdl[i++], &all);
 		free(line);
 	}
-	(void)cmdl;
 	return (0);
 }

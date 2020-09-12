@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	ft_echo(t_mini *all)
+void	ft_echo(t_mini *all, char **cmdl)
 {
 	/*int		cont;
 	char	*arr;
@@ -42,6 +42,7 @@ void	ft_echo(t_mini *all)
 	if (ft_strncmp(all->my_argv[1], "-n", 2) != 0)
 		ft_putchar_fd('\n', 1);
 	all->exit_status = 0;*/
+	(void)cmdl;
 	int i;
 	int j;
 	int	flagn;

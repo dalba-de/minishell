@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 18:37:17 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/11 18:44:37 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/12 02:55:22 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,6 @@
 
 typedef struct	s_mini
 {
-	int			pipe_flag;
-	char		**lines;
-	char		*input;
-	int			start;
 	char		***ev;
 	char		**env;
 	char		*path_str;
@@ -54,27 +50,28 @@ typedef struct	s_mini
 	int			exit_status;
 	int			rd;
 	int			fd;
-	char		*original_str;
 	int			piping;
 	int			double_redir;
 	char		*strl;
+	int			in;
+	int			out;
 }				t_mini;
 
 char			***loadev(char **envp);
 void			check_pipes(char *line, t_mini *all);
 void			get_path_string(char ***tmp_envp, char *bin_path);
 void			insert_path_str_to_search(char *path_str, t_mini *all);
-void			fill_argv(char *tmp_argv, t_mini *all);
-int				try_exec(t_mini *all);
+void			fill_argv(char **cmdl, t_mini *all);
+int				try_exec(t_mini *all, char **cmdl);
 int				check_own_cmd(char *cmd);
-int				bridge_own_cmd(int index, t_mini *all);
+int				bridge_own_cmd(int index, t_mini *all, char **cmdl);
 void			parse_echo_argv(t_mini *all, char *ret, int index);
 char			*delete_quotes(char *ret);
-void			parse_pipes(char *tmp_argv, t_mini *all);
+void			parse_pipes(char **cmdl, t_mini *all);
 int				attach_path(t_mini *all, char *cmd);
 void			not_found(t_mini *all);
 char			***parse_cmdlist(t_mini *all);
-void			parse_redir(char *tmp_argv, t_mini *all);
+void			parse_redir(char **tmp_argv, t_mini *all);
 /*
 ** ---------------------utilev------------------
 */
@@ -98,12 +95,12 @@ char			*create_strtstr(t_mini *all, int *cont, int *flag);
 /*
 ** ---------------------builtins------------------
 */
-void			ft_echo(t_mini *all);
-void			ft_cd(t_mini *all);
-void			ft_pwd(t_mini *all);
-void			ft_export(t_mini *all);
-void			ft_unset(t_mini *all);
+void			ft_echo(t_mini *all, char **cmdl);
+void			ft_cd(t_mini *all, char **cmdl);
+void			ft_pwd(t_mini *all, char **cmdl);
+void			ft_export(t_mini *all, char **cmdl);
+void			ft_unset(t_mini *all, char **cmdl);
 void			ft_env(t_mini *all);
-void			ft_exit(t_mini *all);
+void			ft_exit(t_mini *all, char **cmdl);
 
 #endif

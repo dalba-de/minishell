@@ -6,41 +6,41 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:14:53 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/09 17:10:22 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/12 01:46:02 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int   redir(char *str)
+int   redir(char **cmdl)
 {
 	int i;
 
 	i = 0;
-	while (str[i])
+	while (cmdl[i])
 	{
-		if (str[i] == '>' || str[i] == '<')
+		if (cmdl[i][0] == '>' || cmdl[i][0] == '<')
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-int		piping(char *str)
+int		piping(char **cmdl)
 {
 	int i;
 
 	i = 0;
-	while (str[i])
+	while (cmdl[i])
 	{
-		if (str[i] == PIPE)
+		if (cmdl[i][0] == PIPE)
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-void	fill_my_argv(t_mini *all, int index, char *ret)
+/*void	fill_my_argv(t_mini *all, int index, char *ret)
 {
 	char	*aux;
 	int		i;
@@ -72,11 +72,11 @@ int		fill_gap(t_mini *all, char *ret, int index)
 	if (ft_strncmp(all->my_argv[0], "echo", ft_strlen((all->my_argv[0]))) == 0)
 		return (1);
 	return (0);
-}
+}*/
 
-void	fill_argv(char *tmp_argv, t_mini *all)
+void	fill_argv(char **cmdl, t_mini *all)
 {
-	char	*foo;
+	/*char	*foo;
 	int		index;
 	char	ret[100];
 
@@ -112,5 +112,11 @@ void	fill_argv(char *tmp_argv, t_mini *all)
 			foo++;
 		}
 		fill_my_argv(all, index, ret);
-	}
+	}*/
+	if (piping(cmdl))
+		parse_pipes(cmdl, all);
+	else if (redir(cmdl))
+		parse_redir(cmdl, all);
+	else
+		try_exec(all, cmdl);	
 }
