@@ -43,7 +43,8 @@ static	char	**create_cmd(t_mini *all, int *cont)
 		if (all->strl[*cont] != ' ')
 		{
 			arg = create_arg(all, cont);
-			cmd = add_argtcmd(all, arg, cmd);
+			if (arg[0] != '\0') //Una guarreria?
+				cmd = add_argtcmd(all, arg, cmd);
 		}
 		all->strl[*cont] == ' ' ?((*cont)++) : (0);
 	}
@@ -66,7 +67,7 @@ char	***parse_cmdlist(t_mini *all)
 			cmd = create_cmd(all, cont);
 			cmdl = add_cmdtcmdl(all, cmd, cmdl);
 		}
-		all->strl[*cont] == '\0' ? (0) : ((*cont)++);
+		all->strl[*cont] == '\0' ? (0) : ((*cont)++); //Añadido \0
 	}
 	return (cmdl);
 }

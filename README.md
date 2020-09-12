@@ -1,23 +1,8 @@
 # Minishell
 
 ### TO DO
-* Pendiente de arreglar "" y '' cuando llamo a execve. ✅
-* Pendiente más de un unset. ✅
-* Pendiente de terminar FT_EXPORT. ✅
-* Pendiente FT_ECHO. ✅
-* Comprobar bug en cd. ✅
-* Pendiente control de errores en exit, env, export, pwd, unset.
-* Pendiente funciones /bin/... ✅
-* Pendiente en echo: echo "leto" pareto // Sobra un espacio. ✅
-* Segfault con echo sin argumentos. ✅
-* Pendiente echo $PATH$PATH.
-
-### FIXED
-* Arreglado problema con \n.
-* Ahora los comandos funcionan con comillas simples y dobles.
-* '$?' funcionante con execve.
-* cd $HOME ahora funciona.
-* '$?' funcionante con echo, pwd, exit, cd y export. (no necesario en unset)
+* Pendiente uso de $ cuando hay comillas.
+* Pendiente uso de $?.
 
 ### Resources
 * [Como colaborar en un proyecto en Gihub](https://gist.github.com/BCasal/026e4c7f5c71418485c1)

@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:45:11 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/12 02:36:53 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/12 19:27:20 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ void	init(t_mini *all, char **envp, char **argv, int argc)
 {
 	(void)argc;
 	(void)argv;
-	ft_bzero(all, sizeof(all));
+	ft_bzero(all, sizeof(t_mini));
 	all->path_str = (char *)malloc(sizeof(char) * 256);
-	ft_bzero(all->my_argv, 100);
 	all->ev = loadev(envp);
 	all->exit_status = 0;
 	all->piping = 0;

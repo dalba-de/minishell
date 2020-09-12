@@ -2,3 +2,8 @@
 .vscode
 .DS_Store
 david=patata
+minishell-tester
+obj
+alberto=mas_patata
+minishell
+test.c

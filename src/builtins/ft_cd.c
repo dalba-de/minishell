@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 12:44:40 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/12 01:13:02 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/12 20:04:12 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	ft_cd(t_mini *all, char **cmdl)
 	char	oldvalue[1024];
 	char	value[1024];
 
+	ft_bzero(oldvalue, 1024);
+	ft_bzero(value, 1024);
 	getcwd(oldvalue, sizeof(oldvalue));
 	if (cmdl[1] == NULL)
 		cmdl[1] = search_key_ev(all->ev, "HOME");

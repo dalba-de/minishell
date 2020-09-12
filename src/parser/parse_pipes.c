@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:43:21 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/12 02:34:47 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/12 18:14:37 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	loop_pipe(char ***cmd, t_mini *all)
 
 void	parse_pipes(char **cmdl, t_mini *all)
 {
-	char	**cmd[10];
+	char	**cmd[100];
 	int		i;
 	int		j;
 	int		k;

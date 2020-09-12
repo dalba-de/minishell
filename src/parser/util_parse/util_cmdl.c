@@ -51,7 +51,7 @@ char	**add_argtcmd(t_mini *all, char *arg, char **cmd)
 	char	**result;
 	int		cont;
 
-	if (!(result = malloc(sizeof(char **) * (ft_arglen(cmd) + 2))))
+	if (!(result = malloc(sizeof(char **) * (ft_arglen(cmd) + 3)))) //Añadido 1 al malloc
 			exit(1);
 	cont = 0;
 	while (cmd != NULL && cmd[cont])
@@ -117,10 +117,31 @@ static	int		is_final_arg(char c)
 	return (0);
 }
 
+int		dollar_lenght(t_mini *all, int i, char **dollar)
+{
+	int		cont;
+	char	*key;
+	int		start;
+
+	cont = 0;
+	i++;
+	start = i;
+	while (all->strl[i] != '$' && all->strl[i] != ' ' && all->strl[i] != '\0')
+	{
+		i++;
+		cont++;
+	}
+	key = ft_substr(all->strl, start, cont);
+	*dollar = search_key_ev(all->ev, key);
+	cont++;
+	return (cont);
+}
+
 char	*create_strtstr(t_mini *all, int *cont, int *flag)
 {
 	char	*str;
 	int		cont2;
+	char	*dollar;
 
 	cont2 = 0;
 	if (is_pipe(all->strl[(*cont)]))
@@ -132,7 +153,17 @@ char	*create_strtstr(t_mini *all, int *cont, int *flag)
 	else
 	{
 		while (all->strl[(*cont) + cont2] && !is_final_arg(all->strl[(*cont) + cont2]))
+		{
+			if (all->strl[(*cont) + cont2] == '$')			//Todo nuevo hasta linea 164
+			{
+				str = ft_substr(all->strl, *cont, cont2);
+				cont2 += dollar_lenght(all, ((*cont) + cont2), &dollar);
+				ft_strncat(str, dollar, ft_strlen(dollar));
+				*cont = cont2 + *cont;
+				return (str);
+			}
 			cont2++;
+		}	
 	}
 	str = ft_substr(all->strl, *cont, cont2);
 	*cont = cont2 + *cont;
