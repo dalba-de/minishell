@@ -9,7 +9,7 @@ static	char	*create_arg(t_mini *all, int *cont)
 	arg = NULL;
 	str = NULL;
 	flag[0] = 1;
-	if (all->strl[*cont] == PIPE || all->strl[*cont] == '>' || all->strl[*cont] == '<')
+	if (all->strl[*cont] == PIPE || all->strl[*cont] == '>' || all->strl[*cont] == '<') //NUEVO hasta linea 17
 	{
 		str = create_strtstr(all, cont, flag);
 		arg = add_strtarg(all, str, arg);
@@ -21,7 +21,7 @@ static	char	*create_arg(t_mini *all, int *cont)
 			str = create_strco1(all, cont);
 		else if (all->strl[*cont] == '"')
 			str = create_strco2(all, cont);
-		else if (all->strl[*cont] == ' ' || all->strl[*cont] == ';' || all->strl[*cont] == '|'
+		else if (all->strl[*cont] == ' ' || all->strl[*cont] == ';' || all->strl[*cont] == '|' //CAMBIOS
 		|| all->strl[*cont] == '>' || all->strl[*cont] == '<')
 			break ;
 		else

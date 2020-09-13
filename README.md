@@ -1,8 +1,11 @@
 # Minishell
 
 ### TO DO
-* Pendiente uso de $ cuando hay comillas.
-* Pendiente uso de $?.
+
+### HECHO
+* Uso de $?.
+* Export sin argumentos.
+* Uso de $ cuando hay comillas.
 
 ### Resources
 * [Como colaborar en un proyecto en Gihub](https://gist.github.com/BCasal/026e4c7f5c71418485c1)

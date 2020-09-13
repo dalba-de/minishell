@@ -91,15 +91,59 @@ char	*create_strco1(t_mini *all, int *cont)
 	return (str);
 }
 
+char	*parse_dollar(char *str, int start, t_mini *all)
+{
+	int		i;
+	int		j;
+	int		k;
+	char	*dollar;
+	char	*key;
+	char	*ret;
+	
+	ret = malloc(sizeof(char *) * 1024);
+	j = -1;
+	while (++j < start)
+		ret[j] = str[j];
+	k = j;
+	start++;
+	j = start;
+	i = 0;
+	while (str[j] != '$' && str[j] != ' ' && str[j] != '\0')
+	{
+		i++;
+		j++;
+	}
+	key = ft_substr(str, start, i);
+	dollar = search_key_ev(all->ev, key);
+	ft_strncat(ret, dollar, ft_strlen(dollar));
+	i = ft_strlen(dollar) + k;
+	while (str[j])
+	{
+		ret[i] = str[j];
+		i++;
+		j++;
+	}	
+	ret[i] = '\0';
+	return (ret);
+}
+
 char	*create_strco2(t_mini *all, int *cont)
 {
 	char	*str;
+	int		i;
 	
 	(*cont)++;
 	str = ft_strcdup(&all->strl[*cont], '"');
 	while (all->strl[*cont] && all->strl[*cont] != '"') //cambiado &&
 		(*cont)++;
 	all->strl[*cont] == '"' ? ((*cont)++) : 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+			str = parse_dollar(str, i, all);   //Nueva funcion encima
+		i++;
+	}
 	return (str);
 }
 
@@ -137,11 +181,33 @@ int		dollar_lenght(t_mini *all, int i, char **dollar)
 	return (cont);
 }
 
+char	*create_dollar(t_mini *all, char **str, int *cont, int cont2)
+{
+	char	*dollar;
+
+	if (all->strl[(*cont) + cont2 + 1] == '?')
+	{
+		*str = ft_substr(all->strl, *cont, cont2);
+		cont2 += 2;
+		dollar = ft_itoa(all->exit_status);
+		ft_strncat(*str, dollar, ft_strlen(dollar));
+		*cont = cont2 + *cont;
+		return (*str);
+	}
+	else
+	{
+		*str = ft_substr(all->strl, *cont, cont2);
+		cont2 += dollar_lenght(all, ((*cont) + cont2), &dollar);
+		ft_strncat(*str, dollar, ft_strlen(dollar));
+		*cont = cont2 + *cont;
+		return (*str);
+	}
+}
+
 char	*create_strtstr(t_mini *all, int *cont, int *flag)
 {
 	char	*str;
 	int		cont2;
-	char	*dollar;
 
 	cont2 = 0;
 	if (is_pipe(all->strl[(*cont)]))
@@ -154,14 +220,8 @@ char	*create_strtstr(t_mini *all, int *cont, int *flag)
 	{
 		while (all->strl[(*cont) + cont2] && !is_final_arg(all->strl[(*cont) + cont2]))
 		{
-			if (all->strl[(*cont) + cont2] == '$')			//Todo nuevo hasta linea 164
-			{
-				str = ft_substr(all->strl, *cont, cont2);
-				cont2 += dollar_lenght(all, ((*cont) + cont2), &dollar);
-				ft_strncat(str, dollar, ft_strlen(dollar));
-				*cont = cont2 + *cont;
-				return (str);
-			}
+			if (all->strl[(*cont) + cont2] == '$')			//Nuevo + 2 funciones superiores
+				return (create_dollar(all, &str, cont, cont2));
 			cont2++;
 		}	
 	}

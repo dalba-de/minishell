@@ -13,13 +13,18 @@
 
 int main()
 {
-	char *arg[] = {"ls", "-la", NULL};
+	char *arg[] = {NULL};
 	char *env[] = {NULL};
 
 	pid_t pid = fork();
 	if (pid == 0)
 	{
-		execve("/bin/ls", arg, env);
+		execv("./line_program", arg);
 		return (0);
 	}
+	else
+	{
+		wait(NULL);
+	}
+	return 0;	
 }
