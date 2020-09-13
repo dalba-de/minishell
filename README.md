@@ -1,6 +1,7 @@
 # Minishell
 
 ### TO DO
+* Uso de $? entre comillas.
 
 ### HECHO
 * Uso de $?.
