@@ -108,6 +108,20 @@ char	*parse_dollar(char *str, int start, t_mini *all)
 	start++;
 	j = start;
 	i = 0;
+	if (str[j] == '?')
+	{
+		dollar = ft_itoa(all->exit_status);
+		ft_strncat(ret, dollar, ft_strlen(dollar));
+		i = ft_strlen(dollar) + k + 1;
+		while (str[j])
+		{
+			ret[i] = str[j];
+			i++;
+			j++;
+		}	
+		ret[i] = '\0';
+		return (ret);
+	}
 	while (str[j] != '$' && str[j] != ' ' && str[j] != '\0')
 	{
 		i++;
