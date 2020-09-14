@@ -68,7 +68,7 @@ int				bridge_own_cmd(int index, t_mini *all, char **cmdl);
 void			parse_echo_argv(t_mini *all, char *ret, int index);
 char			*delete_quotes(char *ret);
 void			parse_pipes(char **cmdl, t_mini *all);
-int				attach_path(t_mini *all, char *cmd);
+int				attach_path(t_mini *all);
 void			not_found(t_mini *all);
 char			***parse_cmdlist(t_mini *all);
 void			parse_redir(char **tmp_argv, t_mini *all);
@@ -87,13 +87,16 @@ int				count_double_str(char **str);
 /*
 ** ---------------------utilcmdl------------------
 */
+int				ft_cmdlen(char ***cmdl);
+int				ft_arglen(char **cmd);
+int				is_pipe(char c);
+int				is_final_arg(char c);
 char			***add_cmdtcmdl(char **cmd, char ***cmdl);
 char			**add_argtcmd(char *arg, char **cmd);
-char			*add_strtarg(t_mini *all, char *str, char *arg);
+char			*add_strtarg(char *str, char *arg);
 char			*create_strco1(t_mini *all, int *cont);
 char			*create_strco2(t_mini *all, int *cont);
 char			*create_strtstr(t_mini *all, int *cont, int *flag);
-
 /*
 ** ---------------------builtins------------------
 */

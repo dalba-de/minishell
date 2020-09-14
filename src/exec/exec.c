@@ -39,24 +39,24 @@ void	call_execve(char *cmd, t_mini *all, char **cmdl)
 		all->exit_status = WEXITSTATUS(all->status);
 }
 
-int		attach_path(t_mini *all, char *cmd)
+int		attach_path(t_mini *all) //Convertir a void
 {
-	char	ret[100];
+	char	*ret;
 	int		index;
 	int		fd;
 
-	bzero(ret, 100);
 	index = 0;
 	while (all->search_path[index] != NULL)
 	{
-		ft_strcpy(ret, all->search_path[index]);
-		ft_strncat(ret, cmd, ft_strlen(cmd));
+		ret = ft_strjoin(all->search_path[index], all->cmd);
 		if ((fd = open(ret, O_RDONLY)) > 0)
 		{
-			ft_strncpy(cmd, ret, ft_strlen(ret));
+			free(all->cmd);
+			all->cmd = ret;
 			close(fd);
-			return (0);
+			break ;
 		}
+		free(ret);
 		index++;
 	}
 	return (0);
@@ -86,7 +86,7 @@ int		try_exec(t_mini *all, char **cmdl)
 	{
 		if (!(check_slash(all->cmd)))
 		{
-			if (attach_path(all, all->cmd) == 0)
+			if (attach_path(all) == 0)
 				call_execve(all->cmd, all, cmdl);
 		}
 		else

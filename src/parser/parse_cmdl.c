@@ -31,7 +31,7 @@ static char	*create_arg(t_mini *all, int *cont)
 			break ;
 		else
 			str = create_strtstr(all, cont, flag);
-		arg = add_strtarg(all, str, arg);
+		arg = add_strtarg(str, arg);
 	}
 	return (arg);
 }
