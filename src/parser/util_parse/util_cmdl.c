@@ -25,14 +25,13 @@ int		ft_arglen(char **cmd)
 }
 
 
-char	***add_cmdtcmdl(t_mini *all, char **cmd, char ***cmdl)
+char	***add_cmdtcmdl(char **cmd, char ***cmdl)
 {
-	(void)all;
 	char	***result;
 	int		cont;
 
 	if (!(result = malloc(sizeof(char ***) * (ft_cmdlen(cmdl) + 2))))
-			exit(1);
+		exit(1);
 	cont = 0;
 	while (cmdl != NULL && cmdl[cont])
 	{
@@ -45,14 +44,13 @@ char	***add_cmdtcmdl(t_mini *all, char **cmd, char ***cmdl)
 	return (result);
 }
 
-char	**add_argtcmd(t_mini *all, char *arg, char **cmd)
+char	**add_argtcmd(char *arg, char **cmd)
 {
-	(void)all;
 	char	**result;
 	int		cont;
 
-	if (!(result = malloc(sizeof(char **) * (ft_arglen(cmd) + 3)))) //Añadido 1 al malloc
-			exit(1);
+	if (!(result = malloc(sizeof(char **) * (ft_arglen(cmd) + 2))))
+		exit(1);
 	cont = 0;
 	while (cmd != NULL && cmd[cont])
 	{
@@ -73,7 +71,7 @@ char		*add_strtarg(t_mini *all, char *str, char *arg)
 	if (arg == NULL)
 		return (str);
 	if (!(result = ft_strjoin(arg, str)))
-		exit(1); //comentarlo
+		exit(EXIT_FAILURE);
 	free(str);
 	free(arg);
 	return (result);
@@ -85,7 +83,7 @@ char	*create_strco1(t_mini *all, int *cont)
 	
 	(*cont)++;
 	str = ft_strcdup(&all->strl[*cont], '\'');
-	while (all->strl[*cont] && all->strl[*cont] != '\'') //cambiado &&
+	while (all->strl[*cont] && all->strl[*cont] != '\'')
 		(*cont)++;
 	all->strl[*cont] == '\'' ? ((*cont)++) : 0;
 	return (str);
@@ -148,7 +146,7 @@ char	*create_strco2(t_mini *all, int *cont)
 	
 	(*cont)++;
 	str = ft_strcdup(&all->strl[*cont], '"');
-	while (all->strl[*cont] && all->strl[*cont] != '"') //cambiado &&
+	while (all->strl[*cont] && all->strl[*cont] != '"')
 		(*cont)++;
 	all->strl[*cont] == '"' ? ((*cont)++) : 0;
 	i = 0;
@@ -184,7 +182,8 @@ int		dollar_lenght(t_mini *all, int i, char **dollar)
 	cont = 0;
 	i++;
 	start = i;
-	while (all->strl[i] != '$' && all->strl[i] != ' ' && all->strl[i] != '\0')
+	while (all->strl[i] != '\0' && all->strl[i] != '$'
+	&& !is_final_arg(all->strl[i]))
 	{
 		i++;
 		cont++;
@@ -195,26 +194,39 @@ int		dollar_lenght(t_mini *all, int i, char **dollar)
 	return (cont);
 }
 
-char	*create_dollar(t_mini *all, char **str, int *cont, int cont2)
+char	*join_dollar(char *str1, char *str2)
+{
+	char	*arr;
+
+	arr = ft_strjoin(str1, str2);
+	free(str1);
+	free(str2);
+	return (arr);
+}
+
+char	*create_dollar(t_mini *all, int *cont, int cont2)
 {
 	char	*dollar;
+	char	*str;
 
 	if (all->strl[(*cont) + cont2 + 1] == '?')
 	{
-		*str = ft_substr(all->strl, *cont, cont2);
+		str = ft_substr(all->strl, *cont, cont2);
 		cont2 += 2;
 		dollar = ft_itoa(all->exit_status);
-		ft_strncat(*str, dollar, ft_strlen(dollar));
+		str = join_dollar(str, dollar);
 		*cont = cont2 + *cont;
-		return (*str);
+		return (str);
 	}
 	else
 	{
-		*str = ft_substr(all->strl, *cont, cont2);
+		str = ft_substr(all->strl, *cont, cont2);
 		cont2 += dollar_lenght(all, ((*cont) + cont2), &dollar);
-		ft_strncat(*str, dollar, ft_strlen(dollar));
+		str = join_dollar(str, dollar);
+		while(all->strl[cont2 + *cont] == ' ' && str[0] == '\0')
+			(*cont)++;
 		*cont = cont2 + *cont;
-		return (*str);
+		return (str);
 	}
 }
 
@@ -235,9 +247,11 @@ char	*create_strtstr(t_mini *all, int *cont, int *flag)
 		while (all->strl[(*cont) + cont2] && !is_final_arg(all->strl[(*cont) + cont2]))
 		{
 			if (all->strl[(*cont) + cont2] == '$')			//Nuevo + 2 funciones superiores
-				return (create_dollar(all, &str, cont, cont2));
+				return (create_dollar(all, cont, cont2));
 			cont2++;
-		}	
+		}
+		if (is_pipe(all->strl[(*cont) + cont2]))
+			flag[0] = 0;
 	}
 	str = ft_substr(all->strl, *cont, cont2);
 	*cont = cont2 + *cont;

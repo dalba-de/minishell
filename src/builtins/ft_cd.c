@@ -6,29 +6,11 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 12:44:40 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/12 20:04:12 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/14 17:29:01 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	change_value(t_mini *all, char **cmdl)
-{
-	char	path[1024];
-	int		i;
-	int		j;
-
-	i = 1;
-	j = 0;
-	while (cmdl[1][i] != '\0')
-	{
-		path[j] = cmdl[1][i];
-		i++;
-		j++;
-	}
-	path[j] = '\0';
-	cmdl[1] = search_key_ev(all->ev, path);
-}
 
 void	ft_cd(t_mini *all, char **cmdl)
 {
@@ -40,8 +22,6 @@ void	ft_cd(t_mini *all, char **cmdl)
 	getcwd(oldvalue, sizeof(oldvalue));
 	if (cmdl[1] == NULL)
 		cmdl[1] = search_key_ev(all->ev, "HOME");
-	else if (cmdl[1][0] == '$')
-		change_value(all, cmdl);
 	if (chdir(cmdl[1]) == -1)
 	{
 		ft_putstr_fd("cd : ", STDERR_FILENO);

@@ -1,6 +1,11 @@
 # Minishell
 
-### TO DO
+### NORMINETTE IN
+* minishell.c y minishell.h
+* bridge.c
+* exec/
+* parser/ (excepto utils)
+* builtins
 
 ### HECHO
 * Uso de $?.

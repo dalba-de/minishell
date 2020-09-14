@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 19:30:01 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/13 18:43:36 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/14 18:19:50 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,8 @@ int		check_slash(char *cmd)
 
 int		try_exec(t_mini *all, char **cmdl)
 {
-	all->cmd = (char *)malloc(sizeof(char) * 100);
+	all->cmd = (char *)malloc(sizeof(char) * (ft_strlen(cmdl[0]) + 1));
 	ft_strncpy(all->cmd, cmdl[0], ft_strlen(cmdl[0]));
-	ft_strncat(all->cmd, "\0", 1);
 	if ((all->rd = check_own_cmd(all->cmd)) != 0)
 		bridge_own_cmd(all->rd, all, cmdl);
 	else
@@ -101,5 +100,6 @@ int		try_exec(t_mini *all, char **cmdl)
 				not_found(all);
 		}
 	}
+	free(all->cmd);
 	return (0);
 }

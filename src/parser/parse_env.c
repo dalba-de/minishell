@@ -6,13 +6,13 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:33:28 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/11 17:45:41 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/14 18:29:41 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	count_triple_line(char ***env)
+int			count_triple_str(char ***env)
 {
 	int i;
 
@@ -22,7 +22,7 @@ static int	count_triple_line(char ***env)
 	return (i);
 }
 
-static int	count_line_envp(char **envp)
+int			count_double_str(char **envp)
 {
 	int	cont;
 
@@ -39,8 +39,8 @@ char		**env_to_double(char ***env)
 	char	*aux1;
 	int		lines;
 
-	lines = count_triple_line(env);
-	aux = malloc (sizeof(char **) * (lines + 1));
+	lines = count_triple_str(env);
+	aux = malloc(sizeof(char **) * (lines + 1));
 	i = 0;
 	while (env[i])
 	{
@@ -60,7 +60,7 @@ char		***loadev(char **envp)
 	int		cont;
 	int		cont2;
 
-	lenline = count_line_envp(envp);
+	lenline = count_double_str(envp);
 	arr = malloc(sizeof(char *) * (lenline + 1));
 	cont = 0;
 	while (cont < lenline)

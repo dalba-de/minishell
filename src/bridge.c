@@ -1,37 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   bridge.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/27 12:48:52 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/14 18:32:08 by dalba-de         ###   ########.fr       */
+/*   Created: 2020/08/26 18:14:53 by dalba-de          #+#    #+#             */
+/*   Updated: 2020/09/14 18:18:30 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exit(t_mini *all, char **cmdl)
+int		redir(char **cmdl)
 {
 	int i;
 
-	if (cmdl[2] != NULL)
+	i = 0;
+	while (cmdl[i])
 	{
-		ft_putendl_fd("exit: too many arguments", STDERR_FILENO);
-		all->exit_status = 1;
-		return ;
+		if (cmdl[i][0] == '>' || cmdl[i][0] == '<')
+			return (1);
+		i++;
 	}
-	else if (cmdl[1] != NULL)
+	return (0);
+}
+
+int		piping(char **cmdl)
+{
+	int i;
+
+	i = 0;
+	while (cmdl[i])
 	{
-		i = 0;
-		while (cmdl[1][i])
-		{
-			if (!ft_isdigit(cmdl[1][i]))
-				all->exit_status = 0;
-			i++;
-		}
-		all->exit_status = ft_atoi(cmdl[1]);
+		if (cmdl[i][0] == PIPE)
+			return (1);
+		i++;
 	}
-	exit(0);
+	return (0);
+}
+
+void	bridge(char **cmdl, t_mini *all)
+{
+	if (piping(cmdl))
+		parse_pipes(cmdl, all);
+	else if (redir(cmdl))
+		parse_redir(cmdl, all);
+	else
+		try_exec(all, cmdl);
 }

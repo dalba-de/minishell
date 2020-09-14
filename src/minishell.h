@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 18:37:17 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/12 02:55:22 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/14 18:16:42 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char			***loadev(char **envp);
 void			check_pipes(char *line, t_mini *all);
 void			get_path_string(char ***tmp_envp, char *bin_path);
 void			insert_path_str_to_search(char *path_str, t_mini *all);
-void			fill_argv(char **cmdl, t_mini *all);
+void			bridge(char **cmdl, t_mini *all);
 int				try_exec(t_mini *all, char **cmdl);
 int				check_own_cmd(char *cmd);
 int				bridge_own_cmd(int index, t_mini *all, char **cmdl);
@@ -82,11 +82,13 @@ void			delev(t_mini *all, char *key);
 void			freecer(char ***ev, int len);
 int				count_line(char ***envp);
 char			**env_to_double(char ***env);
+int				count_triple_str(char ***str);
+int				count_double_str(char **str);
 /*
 ** ---------------------utilcmdl------------------
 */
-char			***add_cmdtcmdl(t_mini *all, char **cmd, char ***cmdl);
-char			**add_argtcmd(t_mini *all, char *arg, char **cmd);
+char			***add_cmdtcmdl(char **cmd, char ***cmdl);
+char			**add_argtcmd(char *arg, char **cmd);
 char			*add_strtarg(t_mini *all, char *str, char *arg);
 char			*create_strco1(t_mini *all, int *cont);
 char			*create_strco2(t_mini *all, int *cont);

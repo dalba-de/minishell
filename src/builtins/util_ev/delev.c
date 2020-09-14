@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 12:53:16 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/27 14:22:28 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/14 18:34:17 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	delev(t_mini *all, char *key)
 	cont2 = 0;
 	while (all->ev[cont1 + cont2])
 	{
-		if (ft_strncmp(all->ev[cont1 + cont2][0], key, ft_strlen(all->ev[cont1 + cont2][0])) != 0)
+		if (ft_strncmp(all->ev[cont1 + cont2][0], key,
+		ft_strlen(all->ev[cont1 + cont2][0])) != 0)
 		{
 			arr[cont1] = malloc(sizeof(char *) * (2));
 			arr[cont1][0] = ft_strdup(all->ev[cont1 + cont2][0]);

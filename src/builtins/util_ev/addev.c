@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 12:53:12 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/08/27 12:53:13 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/14 18:33:46 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,5 @@ void	addev(t_mini *all, char *key, char *value)
 	arr[cont][0] = ft_strdup(key);
 	arr[cont][1] = ft_strdup(value);
 	arr[cont + 1] = NULL;
-	/*arr[cont + 1] = malloc(sizeof(char *) * (2));
-	arr[cont + 1][0] = NULL;
-	arr[cont + 1][1] = NULL;
-	freecer(all->ev, len + 2);*/
 	all->ev = arr;
 }

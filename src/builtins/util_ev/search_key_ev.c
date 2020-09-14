@@ -6,13 +6,13 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 12:53:06 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/12 19:45:01 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/14 18:34:53 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*search_key_ev(char	***ev, char *key)
+char	*search_key_ev(char ***ev, char *key)
 {
 	int	cont;
 

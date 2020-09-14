@@ -6,11 +6,41 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:45:11 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/12 19:27:20 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/14 18:17:01 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_2d(char **str)
+{
+	int i;
+	int	len;
+
+	len = count_double_str(str);
+	i = 0;
+	while (i < len)
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
+
+void	free_3d(char ***str)
+{
+	int len;
+	int	i;
+
+	len = count_triple_str(str);
+	i = 0;
+	while (i < len)
+	{
+		free_2d(str[i]);
+		i++;
+	}
+	free(str);
+}
 
 void	handle_signal(int signo)
 {
@@ -54,8 +84,9 @@ int		main(int argc, char **argv, char **envp)
 			continue ;
 		i = 0;
 		while (cmdl[i] != NULL)
-			fill_argv(cmdl[i++], &all);
+			bridge(cmdl[i++], &all);
 		free(line);
+		free_3d(cmdl);
 	}
 	return (0);
 }

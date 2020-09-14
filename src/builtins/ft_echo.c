@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/14 18:32:24 by dalba-de          #+#    #+#             */
+/*   Updated: 2020/09/14 18:33:01 by dalba-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	ft_echo(t_mini *all, char **cmdl)
@@ -11,7 +23,8 @@ void	ft_echo(t_mini *all, char **cmdl)
 	i = 1;
 	while (cmdl[i])
 	{
-		if (cmdl[i][0] == '-' && cmdl[i][1] == 'n' && cmdl[i][2] == '\0' && !flag_start)
+		if (cmdl[i][0] == '-' && cmdl[i][1] == 'n'
+		&& cmdl[i][2] == '\0' && !flag_start)
 			flagn = 1;
 		else
 		{
@@ -20,7 +33,7 @@ void	ft_echo(t_mini *all, char **cmdl)
 			if (cmdl[i + 1] != NULL)
 				ft_putchar_fd(' ', 1);
 		}
-		i++;			
+		i++;
 	}
 	if (!flagn)
 		ft_putchar_fd('\n', 1);
