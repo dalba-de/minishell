@@ -1,66 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_strco2.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/15 12:12:57 by dalba-de          #+#    #+#             */
+/*   Updated: 2020/09/15 12:48:56 by dalba-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-char	*parse_question(t_mini *all, )
+char	*parse_dollar(char *s, int *cont, t_mini *all)
 {
-
-}
-
-
-char	*parse_dollar(char *str, int *start, t_mini *all)
-{
-	int		i;
-	int		j;
-	int		k;
-	char	*dollar;
 	char	*key;
-	char	*ret;
-	char	*arr;
-	char	*arr2;
-	
-	arr = ft_strcdup(str, '$');
+	char	*dollar;
+	int		start;
+	int		len;
 
-	ret = malloc(sizeof(char *) * 1024);
-	j = -1;
-	while (++j < start)
-		ret[j] = str[j];
-	k = j;
-	start++;
-	j = start;
-	i = 0;
-
-	if (str[start + 1] == '?')
+	(*cont)++;
+	start = *cont;
+	len = 0;
+	if (s[*cont] == '?')
+		return (ft_itoa(all->exit_status));
+	while (s[*cont] && s[*cont] != '$' && s[*cont] != ' ' && s[*cont] != '"')
 	{
-		dollar = ft_itoa(all->exit_status);
-		arr2 = ft_strjoin(arr, dollar);
-		free(dollar);
-		free(arr);
-		arr = arr2;
-		return (arr);
+		(*cont)++;
+		len++;
 	}
-	while (str[j] != '$' && str[j] != ' ' && str[j] != '\0')
-	{
-		i++;
-		j++;
-	}
-	key = ft_substr(str, start, i);
+	key = ft_substr(s, start, len);
 	dollar = search_key_ev(all->ev, key);
-	ft_strncat(ret, dollar, ft_strlen(dollar));
-	i = ft_strlen(dollar) + k;
-	while (str[j])
-	{
-		ret[i] = str[j];
-		i++;
-		j++;
-	}	
-	ret[i] = '\0';
-	return (ret);
+	free(key);
+	(*cont)--;
+	return (dollar);
 }
 
 char	*ft_strdupi(char *s, int i)
 {
 	char	*arr;
 	int		cont;
-	
+
 	arr = malloc((i + 1));
 	cont = 0;
 	while (s[cont] && cont < i)
@@ -72,42 +52,59 @@ char	*ft_strdupi(char *s, int i)
 	return (arr);
 }
 
+char	*ft_charjoin(char const *s1, char const s2)
+{
+	char	*concat;
+	int		i;
+
+	if (!s1 || !s2)
+		return (NULL);
+	concat = malloc((ft_strlen(s1) + (2 * sizeof(char))));
+	if (concat == NULL)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		concat[i] = s1[i];
+		i++;
+	}
+	concat[i] = s2;
+	i++;
+	concat[i] = '\0';
+	return (concat);
+}
+
 char	*create_strco2(t_mini *all, int *cont)
 {
 	char	*str;
 	char	*arr;
-	char	*arr2;
-	char	*arr3;
-	int		i;
-	
+	char	*dollar;
+
 	(*cont)++;
-	str = ft_strcdup(&all->strl[*cont], '"');
+	str = ft_strdup("");
 	while (all->strl[*cont] && all->strl[*cont] != '"')
-		(*cont)++;
-	all->strl[*cont] == '"' ? ((*cont)++) : 0;
-	i = 0;
-	arr = ft_strdup("");
-	while (str[i])
 	{
-		if (str[i] == '$')
+		if (all->strl[*cont] == '$')
 		{
-			arr2 = ft_strjoin(arr, parse_dollar(&str[i], &i, all));
-			free(arr);
-			arr = arr2;
+			dollar = parse_dollar(all->strl, cont, all);
+			if (dollar)
+			{
+				arr = ft_strjoin(str, dollar);
+				free(str);
+			}
+			else
+				arr = str;
+			free(dollar);
+			str = arr;
 		}
 		else
 		{
-			arr3 = ft_strdupi(&str[i], 1);
-			arr2 = ft_strjoin(arr, arr3);
-			free(arr);
-			free(arr3);
-			arr = arr2;
+			arr = ft_charjoin(str, all->strl[*cont]);
+			free(str);
+			str = arr;
 		}
-		i++;
+		(*cont)++;
 	}
-	free(str);
-	str = arr;
+	all->strl[*cont] == '"' ? ((*cont)++) : 0;
 	return (str);
 }
-
-
