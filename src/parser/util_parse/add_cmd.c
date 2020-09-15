@@ -50,7 +50,7 @@ char	**add_argtcmd(char *arg, char **cmd)
 	return (result);
 }
 
-char		*add_strtarg(char *str, char *arg)
+char	*add_strtarg(char *str, char *arg)
 {
 	char	*result;
 

@@ -16,14 +16,14 @@ void	ft_exit(t_mini *all, char **cmdl)
 {
 	int i;
 
-	if (cmdl[2] != NULL)
+	if (cmdl[1] != NULL)
 	{
-		ft_putendl_fd("exit: too many arguments", STDERR_FILENO);
-		all->exit_status = 1;
-		return ;
-	}
-	else if (cmdl[1] != NULL)
-	{
+		if (cmdl[2] != NULL)
+		{
+			ft_putendl_fd("exit: too many arguments", STDERR_FILENO);
+			all->exit_status = 1;
+			return ;
+		}
 		i = 0;
 		while (cmdl[1][i])
 		{
@@ -33,5 +33,5 @@ void	ft_exit(t_mini *all, char **cmdl)
 		}
 		all->exit_status = ft_atoi(cmdl[1]);
 	}
-	exit(0);
+	exit(all->exit_status);
 }

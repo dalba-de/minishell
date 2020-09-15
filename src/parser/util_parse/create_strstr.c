@@ -62,7 +62,7 @@ char	*create_dollar(t_mini *all, int *cont, int cont2)
 		str = ft_substr(all->strl, *cont, cont2);
 		cont2 += dollar_lenght(all, ((*cont) + cont2), &dollar);
 		str = join_dollar(str, dollar);
-		while(all->strl[cont2 + *cont] == ' ' && str[0] == '\0')
+		while (all->strl[cont2 + *cont] == ' ' && str[0] == '\0')
 			(*cont)++;
 		*cont = cont2 + *cont;
 		return (str);
@@ -78,19 +78,19 @@ char	*create_strtstr(t_mini *all, int *cont, int *flag)
 	if (is_pipe(all->strl[(*cont)]))
 	{
 		flag[0] = 0;
-		cont2++;
-		all->strl[(*cont)] == '>' && all->strl[(*cont) + 1] == '>' ? (cont2++) : (0);
+		all->strl[(*cont)] == '>' && all->strl[(*cont) + 1] == '>'
+			? (cont2 = cont2 + 2) : (cont2++);
 	}
 	else
 	{
-		while (all->strl[(*cont) + cont2] && !is_final_arg(all->strl[(*cont) + cont2]))
+		while (all->strl[(*cont) + cont2]
+			&& !is_final_arg(all->strl[(*cont) + cont2]))
 		{
 			if (all->strl[(*cont) + cont2] == '$')
 				return (create_dollar(all, cont, cont2));
 			cont2++;
 		}
-		if (is_pipe(all->strl[(*cont) + cont2]))
-			flag[0] = 0;
+		is_pipe(all->strl[(*cont) + cont2]) ? (flag[0] = 0) : (0);
 	}
 	str = ft_substr(all->strl, *cont, cont2);
 	*cont = cont2 + *cont;

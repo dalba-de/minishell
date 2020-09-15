@@ -12,91 +12,70 @@
 
 #include "minishell.h"
 
-char	*parse_dollar(char *s, int *cont, t_mini *all)
+char	*parse_dollar(t_mini *all, int *cont)
 {
 	char	*key;
 	char	*dollar;
-	int		start;
 	int		len;
 
 	(*cont)++;
-	start = *cont;
-	len = 0;
-	if (s[*cont] == '?')
+	if (all->strl[*cont] == '?')
 		return (ft_itoa(all->exit_status));
-	while (s[*cont] && s[*cont] != '$' && s[*cont] != ' ' && s[*cont] != '"')
-	{
-		(*cont)++;
+	len = 0;
+	while (all->strl[*cont + len] && all->strl[*cont + len] != '$'
+		&& all->strl[*cont + len] != ' ' && all->strl[*cont + len] != '"')
 		len++;
-	}
-	key = ft_substr(s, start, len);
+	key = ft_substr(all->strl, *cont, len);
 	dollar = search_key_ev(all->ev, key);
 	free(key);
-	(*cont)--;
+	(*cont) = ((*cont) + len - 1);
 	return (dollar);
-}
-
-char	*ft_strdupi(char *s, int i)
-{
-	char	*arr;
-	int		cont;
-
-	arr = malloc((i + 1));
-	cont = 0;
-	while (s[cont] && cont < i)
-	{
-		arr[cont] = s[cont];
-		cont++;
-	}
-	arr[cont] = '\0';
-	return (arr);
 }
 
 char	*ft_charjoin(char const *s1, char const s2)
 {
-	char	*concat;
+	char	*arr;
 	int		i;
 
 	if (!s1 || !s2)
 		return (NULL);
-	concat = malloc((ft_strlen(s1) + (2 * sizeof(char))));
-	if (concat == NULL)
+	if (!(arr = malloc(sizeof(char *) * (ft_strlen(s1) + 2))))
 		return (NULL);
 	i = 0;
 	while (s1[i])
 	{
-		concat[i] = s1[i];
+		arr[i] = s1[i];
 		i++;
 	}
-	concat[i] = s2;
-	i++;
-	concat[i] = '\0';
-	return (concat);
+	arr[i] = s2;
+	arr[i + 1] = '\0';
+	return (arr);
+}
+
+char	*add_strtstr(char *str1, char *str2)
+{
+	char	*result;
+
+	if (str2 == NULL)
+		return (str1);
+	if (!(result = ft_strjoin(str1, str2)))
+		exit(EXIT_FAILURE);
+	free(str1);
+	free(str2);
+	return (result);
 }
 
 char	*create_strco2(t_mini *all, int *cont)
 {
 	char	*str;
 	char	*arr;
-	char	*dollar;
 
 	(*cont)++;
 	str = ft_strdup("");
 	while (all->strl[*cont] && all->strl[*cont] != '"')
 	{
 		if (all->strl[*cont] == '$')
-		{
-			dollar = parse_dollar(all->strl, cont, all);
-			if (dollar)
-			{
-				arr = ft_strjoin(str, dollar);
-				free(str);
-			}
-			else
-				arr = str;
-			free(dollar);
-			str = arr;
-		}
+			str = add_strtstr(str, parse_dollar(all, cont));
 		else
 		{
 			arr = ft_charjoin(str, all->strl[*cont]);
