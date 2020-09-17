@@ -16,18 +16,12 @@ int		dollar_lenght(t_mini *all, int i, char **dollar)
 {
 	int		cont;
 	char	*key;
-	int		start;
 
-	cont = 0;
 	i++;
-	start = i;
-	while (all->strl[i] != '\0' && all->strl[i] != '$'
-	&& !is_final_arg(all->strl[i]))
-	{
-		i++;
+	cont = 0;
+	while (ft_isalnum(all->strl[i + cont]) || all->strl[i + cont] == '_')
 		cont++;
-	}
-	key = ft_substr(all->strl, start, cont);
+	key = ft_substr(all->strl, i, cont);
 	*dollar = search_key_ev(all->ev, key);
 	if (*dollar == NULL)
 		*dollar = ft_strdup("");
