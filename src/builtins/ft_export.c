@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 18:20:24 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/13 18:38:47 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/17 19:14:28 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,19 @@ void	print_error_export(t_mini *all, int arg)
 	all->exit_status = 1;
 }
 
-void	sort_env(t_mini *all, char **cmdl)
+void	sort_env(t_mini *all)
 {
+	char	*cmdl[4];
+	int		i;
+
 	cmdl[0] = ft_strdup("env");
 	cmdl[1] = ft_strdup("|");
 	cmdl[2] = ft_strdup("sort");
 	cmdl[3] = NULL;
 	parse_pipes(cmdl, all);
+	i = 0;
+	while (i < 3)
+		free(cmdl[i++]);
 }
 
 void	ft_export(t_mini *all, char **cmdl)
@@ -57,7 +63,7 @@ void	ft_export(t_mini *all, char **cmdl)
 
 	cont = 1;
 	if (cmdl[1] == NULL)
-		return (sort_env(all, cmdl));
+		return (sort_env(all));
 	while (cmdl[cont])
 	{
 		if (ft_formatev(cont, cmdl))

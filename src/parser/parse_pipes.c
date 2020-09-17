@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:43:21 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/17 17:15:14 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/17 19:17:01 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	forking_pipe(t_mini *all, int p[2], int fd_in, char ***cmd)
 		i++;
 	}
 	try_exec(all, all->my_argv);
-	exit(EXIT_SUCCESS);
+	exit(all->exit_status);
 }
 
 void	loop_pipe(char ***cmd, t_mini *all)
@@ -46,7 +46,9 @@ void	loop_pipe(char ***cmd, t_mini *all)
 		}
 		else
 		{
-			wait(NULL);
+			waitpid(all->pid, &all->status, 0);
+			if (WIFEXITED(all->status))
+				all->exit_status = WEXITSTATUS(all->status);
 			close(p[1]);
 			fd_in = p[0];
 			cmd++;
@@ -72,8 +74,7 @@ void	parse_pipes(char **cmdl, t_mini *all)
 			j++;
 		while (cmdl[j] && cmdl[j][0] != PIPE)
 		{
-			cmd[i][k] = ft_strdup(cmdl[j]);
-			k++;
+			cmd[i][k++] = ft_strdup(cmdl[j]);
 			j++;
 		}
 		cmd[i][k] = NULL;

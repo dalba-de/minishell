@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 12:13:24 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/15 12:13:25 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/17 18:09:44 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	***add_cmdtcmdl(char **cmd, char ***cmdl)
 	int		cont;
 
 	if (!(result = malloc(sizeof(char ***) * (ft_cmdlen(cmdl) + 2))))
-		exit(1);
+		exit(EXIT_FAILURE);
 	cont = 0;
 	while (cmdl != NULL && cmdl[cont])
 	{
@@ -37,7 +37,7 @@ char	**add_argtcmd(char *arg, char **cmd)
 	int		cont;
 
 	if (!(result = malloc(sizeof(char **) * (ft_arglen(cmd) + 2))))
-		exit(1);
+		exit(EXIT_FAILURE);
 	cont = 0;
 	while (cmd != NULL && cmd[cont])
 	{

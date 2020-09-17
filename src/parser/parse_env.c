@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:33:28 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/14 18:29:41 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/17 18:52:17 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char		***loadev(char **envp)
 	cont = 0;
 	while (cont < lenline)
 	{
-		arr[cont] = malloc(sizeof(char *) * (2));
+		arr[cont] = malloc(sizeof(char *) * (3));
 		cont2 = 0;
 		while (cont2 < 2)
 		{
