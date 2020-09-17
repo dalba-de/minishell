@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:14:53 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/14 18:18:30 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/17 16:39:40 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		redir(char **cmdl)
 	return (0);
 }
 
-int		piping(char **cmdl)
+int		piping(char **cmdl, t_mini *all)
 {
 	int i;
 
@@ -34,7 +34,16 @@ int		piping(char **cmdl)
 	while (cmdl[i])
 	{
 		if (cmdl[i][0] == PIPE)
+		{
+			all->pipe_count = 0;
+			while (cmdl[i])
+			{
+				if (cmdl[i][0] == PIPE)
+					all->pipe_count++;
+				i++;
+			}
 			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -42,7 +51,7 @@ int		piping(char **cmdl)
 
 void	bridge(char **cmdl, t_mini *all)
 {
-	if (piping(cmdl))
+	if (piping(cmdl, all))
 		parse_pipes(cmdl, all);
 	else if (redir(cmdl))
 		parse_redir(cmdl, all);

@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 12:13:14 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/15 12:13:14 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/17 17:44:08 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int		dollar_lenght(t_mini *all, int i, char **dollar)
 	}
 	key = ft_substr(all->strl, start, cont);
 	*dollar = search_key_ev(all->ev, key);
+	if (*dollar == NULL)
+		*dollar = ft_strdup("");
 	cont++;
 	return (cont);
 }

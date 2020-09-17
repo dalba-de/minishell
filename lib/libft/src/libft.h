@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalba-de <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 13:14:12 by dalba-de          #+#    #+#             */
-/*   Updated: 2019/11/18 13:07:11 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/17 16:11:30 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ size_t				ft_strlcat(char *dst, char const *src, size_t dstsize);
 char				*ft_strncat(char *dest, char *src, int nb);
 size_t				ft_strlcpy(char *dst, char const *src, size_t dstsize);
 char				*ft_strcpy(char *dst, char const *src);
-char 				*ft_strncpy(char *dest, char *src, unsigned int n);
+char				*ft_strncpy(char *dest, char *src, unsigned int n);
 size_t				ft_strlen(const char *s);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int					ft_strncmp(const char *str1, const char *str2, size_t n);

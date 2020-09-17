@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 18:37:17 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/14 18:16:42 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/17 16:42:09 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct	s_mini
 	char		*strl;
 	int			in;
 	int			out;
+	int			pipe_count;
 }				t_mini;
 
 char			***loadev(char **envp);
@@ -68,7 +69,7 @@ int				bridge_own_cmd(int index, t_mini *all, char **cmdl);
 void			parse_echo_argv(t_mini *all, char *ret, int index);
 char			*delete_quotes(char *ret);
 void			parse_pipes(char **cmdl, t_mini *all);
-int				attach_path(t_mini *all);
+void			attach_path(t_mini *all);
 void			not_found(t_mini *all);
 char			***parse_cmdlist(t_mini *all);
 void			parse_redir(char **tmp_argv, t_mini *all);
@@ -97,6 +98,7 @@ char			*add_strtarg(char *str, char *arg);
 char			*create_strco1(t_mini *all, int *cont);
 char			*create_strco2(t_mini *all, int *cont);
 char			*create_strtstr(t_mini *all, int *cont, int *flag);
+void			free_3d(char ***str);
 /*
 ** ---------------------builtins------------------
 */

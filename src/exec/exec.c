@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 19:30:01 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/14 18:19:50 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/17 16:13:47 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	call_execve(char *cmd, t_mini *all, char **cmdl)
 		all->exit_status = WEXITSTATUS(all->status);
 }
 
-int		attach_path(t_mini *all) //Convertir a void
+void	attach_path(t_mini *all)
 {
 	char	*ret;
 	int		index;
@@ -59,7 +59,6 @@ int		attach_path(t_mini *all) //Convertir a void
 		free(ret);
 		index++;
 	}
-	return (0);
 }
 
 int		check_slash(char *cmd)
@@ -86,8 +85,8 @@ int		try_exec(t_mini *all, char **cmdl)
 	{
 		if (!(check_slash(all->cmd)))
 		{
-			if (attach_path(all) == 0)
-				call_execve(all->cmd, all, cmdl);
+			attach_path(all);
+			call_execve(all->cmd, all, cmdl);
 		}
 		else
 		{
