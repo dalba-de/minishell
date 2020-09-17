@@ -22,8 +22,7 @@ char	*parse_dollar(t_mini *all, int *cont)
 	if (all->strl[*cont] == '?')
 		return (ft_itoa(all->exit_status));
 	len = 0;
-	while (all->strl[*cont + len] && all->strl[*cont + len] != '$'
-		&& all->strl[*cont + len] != ' ' && all->strl[*cont + len] != '"')
+	while (ft_isalnum(all->strl[*cont + len]) || all->strl[*cont + len] == '_')
 		len++;
 	key = ft_substr(all->strl, *cont, len);
 	dollar = search_key_ev(all->ev, key);
