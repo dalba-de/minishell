@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:45:11 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/17 16:39:48 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/20 19:33:31 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	init(t_mini *all, char **envp, char **argv, int argc)
 	all->double_redir = 0;
 	get_path_string(all->ev, all->path_str);
 	insert_path_str_to_search(all->path_str, all);
+	magic(envp);
 }
 
 int		main(int argc, char **argv, char **envp)
@@ -74,7 +75,7 @@ int		main(int argc, char **argv, char **envp)
 	init(&all, envp, argv, argc);
 	while (1)
 	{
-		ft_putstr_fd("\033[31mMinishell>> \033[0m", STDERR_FILENO);
+		ft_putstr_fd("\033[1;31mMinishell>> \033[0m", STDERR_FILENO);
 		rd = get_next_line(STDIN_FILENO, &line);
 		if (rd == 0)
 			break ;
