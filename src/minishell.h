@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 18:37:17 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/20 19:33:42 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/30 17:12:38 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include <stdio.h>
 # include <errno.h>
 # include <limits.h>
-# include <linux/limits.h>
+# include <limits.h>
 # include <pthread.h>
 # include <stdlib.h>
 # include <unistd.h>

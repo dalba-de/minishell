@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:57:10 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/14 18:29:21 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/30 17:13:26 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ void	insert_path_str_to_search(char *path_str, t_mini *all)
 			ft_strncat(ret, tmp, 1);
 		tmp++;
 	}
-	all->search_path[index] = '\0';
+	all->search_path[index] = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:45:11 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/20 19:33:31 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/30 21:37:23 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	init(t_mini *all, char **envp, char **argv, int argc)
 	magic(envp);
 }
 
-int		main(int argc, char **argv, char **envp)
+int		main(int argc, char **argv, char *envp[])
 {
 	char	*line;
 	t_mini	all;
@@ -75,7 +75,7 @@ int		main(int argc, char **argv, char **envp)
 	init(&all, envp, argv, argc);
 	while (1)
 	{
-		ft_putstr_fd("\033[1;31mMinishell>> \033[0m", STDERR_FILENO);
+		ft_putstr_fd("\033[1;31mMinishell>> \033[0m", STDOUT_FILENO);
 		rd = get_next_line(STDIN_FILENO, &line);
 		if (rd == 0)
 			break ;

@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 17:10:58 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/14 18:25:27 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/30 18:15:26 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ void	do_command(char **cmdl, char *input, char *output, t_mini *all)
 int		redir_check(char **tmp, char **input_file, char c, t_mini *all)
 {
 	int i;
+	int j;
+	int flag;
 
+	flag = 0;
 	i = 0;
 	while (tmp[i])
 	{
@@ -65,15 +68,19 @@ int		redir_check(char **tmp, char **input_file, char c, t_mini *all)
 				*input_file = tmp[i + 1];
 			else
 				return (-1);
-			while (tmp[i - 1] != NULL)
+			j = i;
+			while (tmp[j - 1] != NULL)
 			{
-				tmp[i] = tmp[i + 2];
-				i++;
+				tmp[j] = tmp[j + 2];
+				j++;
 			}
-			return (1);
+			flag = 1;
+			i--;
 		}
 		i++;
 	}
+	if (flag)
+		return (1);
 	return (0);
 }
 

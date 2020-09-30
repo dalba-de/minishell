@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 18:20:24 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/17 19:14:28 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/30 21:26:21 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	sort_env(t_mini *all)
 	cmdl[1] = ft_strdup("|");
 	cmdl[2] = ft_strdup("sort");
 	cmdl[3] = NULL;
+	all->pipe_count = 1;
 	parse_pipes(cmdl, all);
 	i = 0;
 	while (i < 3)

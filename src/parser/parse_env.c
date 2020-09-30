@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:33:28 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/17 18:52:17 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/09/30 21:21:56 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ char		***loadev(char **envp)
 			ft_strcdup(envp[cont], '=') : ft_strcdupinv(envp[cont], '=');
 			cont2++;
 		}
+		arr[cont][cont2] = NULL;
 		cont++;
 	}
 	arr[cont] = NULL;
