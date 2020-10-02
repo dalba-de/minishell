@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 18:37:17 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/30 17:12:38 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/10/01 21:24:17 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,14 @@ typedef struct	s_mini
 	int			in;
 	int			out;
 	int			pipe_count;
+	int			free_signal;
 }				t_mini;
 
 char			***loadev(char **envp);
 void			check_pipes(char *line, t_mini *all);
-void			get_path_string(char ***tmp_envp, char *bin_path);
+void			get_path(t_mini *all);
+void			free_path(t_mini *all);
+void			get_path_string(char ***tmp_envp, char *bin_path, t_mini *all);
 void			insert_path_str_to_search(char *path_str, t_mini *all);
 void			bridge(char **cmdl, t_mini *all);
 int				try_exec(t_mini *all, char **cmdl);

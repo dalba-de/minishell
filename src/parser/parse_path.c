@@ -6,18 +6,19 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:57:10 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/30 17:13:26 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/10/01 21:34:00 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	get_path_string(char ***tmp_envp, char *bin_path)
+void	get_path_string(char ***tmp_envp, char *bin_path, t_mini *all)
 {
 	int count;
 
+	all->free_signal = 0;
 	count = 0;
-	while (tmp_envp[count][0] != NULL)
+	while (tmp_envp[count] != NULL)
 	{
 		if (ft_strncmp(tmp_envp[count][0], "PATH", 4) == 0)
 		{
@@ -31,27 +32,27 @@ void	get_path_string(char ***tmp_envp, char *bin_path)
 void	insert_path_str_to_search(char *path_str, t_mini *all)
 {
 	int		index;
-	char	*tmp;
 	char	ret[100];
 
 	ft_bzero(ret, 100);
 	index = 0;
-	tmp = path_str;
-	while (*tmp != '\0')
+	while (*path_str != '\0')
 	{
-		if (*tmp == ':')
+		if (*path_str == ':')
 		{
-			ft_strncat(ret, "/", 1);
-			all->search_path[index] =
-			(char *)malloc(sizeof(char) * (ft_strlen(ret) + 1));
-			ft_strncat(all->search_path[index], ret, ft_strlen(ret));
-			ft_strncat(all->search_path[index], "\0", 1);
+			ft_strncat(ret, "/\0", 2);
+			all->search_path[index] = ft_strdup(ret);
 			index++;
+			all->free_signal++;
 			ft_bzero(ret, 100);
 		}
 		else
-			ft_strncat(ret, tmp, 1);
-		tmp++;
+			ft_strncat(ret, path_str, 1);
+		path_str++;
 	}
+	ft_strncat(ret, "/\0", 2);
+	all->search_path[index] = ft_strdup(ret);
+	index++;
+	all->free_signal++;
 	all->search_path[index] = NULL;
 }

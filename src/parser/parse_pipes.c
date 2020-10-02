@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:43:21 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/17 19:17:01 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/10/01 21:13:40 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	loop_pipe(char ***cmd, t_mini *all)
 		}
 		else
 		{
-			waitpid(all->pid, &all->status, 0);
+			waitpid(-1, &all->status, 0);
 			if (WIFEXITED(all->status))
 				all->exit_status = WEXITSTATUS(all->status);
 			close(p[1]);
