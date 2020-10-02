@@ -31,6 +31,7 @@ void	delev(t_mini *all, char *key)
 			arr[cont1] = malloc(sizeof(char *) * (2));
 			arr[cont1][0] = ft_strdup(all->ev[cont1 + cont2][0]);
 			arr[cont1][1] = ft_strdup(all->ev[cont1 + cont2][1]);
+			arr[cont1][2] = NULL;
 			cont1++;
 		}
 		else

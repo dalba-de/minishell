@@ -26,11 +26,13 @@ void	addev(t_mini *all, char *key, char *value)
 		arr[cont] = malloc(sizeof(char *) * (2));
 		arr[cont][0] = ft_strdup(all->ev[cont][0]);
 		arr[cont][1] = ft_strdup(all->ev[cont][1]);
+		arr[cont][2] = NULL;
 		cont++;
 	}
 	arr[cont] = malloc(sizeof(char *) * (2));
 	arr[cont][0] = ft_strdup(key);
 	arr[cont][1] = ft_strdup(value);
+	arr[cont][2] = NULL;
 	arr[cont + 1] = NULL;
 	free_3d(all->ev);
 	all->ev = arr;
