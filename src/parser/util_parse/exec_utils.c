@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 21:19:36 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/10/01 21:27:18 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/10/03 01:05:25 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@ void	free_path(t_mini *all)
 {
 	int j;
 
-	j = -1;
+	j = 0;
 	free(all->cmd);
 	free(all->path_str);
-	while (++j < all->free_signal)
+	while (j < all->free_signal)
+	{
 		free(all->search_path[j]);
+		j++;
+	}
+	all->path_str = NULL;
 }

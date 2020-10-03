@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 12:31:35 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/12 01:11:23 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/10/02 17:35:17 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ int	bridge_own_cmd(int index, t_mini *all, char **cmdl)
 		ft_env(all);
 	else if (index == EXIT)
 		ft_exit(all, cmdl);
+	else if (index == HELP)
+		open_help(all);
 	return (index);
 }

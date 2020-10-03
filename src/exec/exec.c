@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 19:30:01 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/10/01 21:24:28 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/10/03 01:07:07 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		check_slash(char *cmd)
 
 int		try_exec(t_mini *all, char **cmdl)
 {
-	get_path(all);
+	(all->path_str == NULL) ? get_path(all) : 0;
 	all->cmd = (char *)malloc(sizeof(char) * (ft_strlen(cmdl[0]) + 2));
 	ft_strncpy(all->cmd, cmdl[0], ft_strlen(cmdl[0]));
 	if ((all->rd = check_own_cmd(all->cmd)) != 0)

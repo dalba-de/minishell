@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 18:37:17 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/10/01 21:24:17 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/10/03 01:51:56 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct	s_mini
 {
 	char		***ev;
 	char		**env;
+	char		**original_ev;
 	char		*path_str;
 	char		*search_path[10];
 	char		*my_argv[100];
@@ -103,6 +104,7 @@ char			*create_strco1(t_mini *all, int *cont);
 char			*create_strco2(t_mini *all, int *cont);
 char			*create_strtstr(t_mini *all, int *cont, int *flag);
 void			free_3d(char ***str);
+void			free_2d(char **str);
 /*
 ** ---------------------builtins------------------
 */
@@ -113,5 +115,6 @@ void			ft_export(t_mini *all, char **cmdl);
 void			ft_unset(t_mini *all, char **cmdl);
 void			ft_env(t_mini *all);
 void			ft_exit(t_mini *all, char **cmdl);
+void			open_help(t_mini *all);
 
 #endif
