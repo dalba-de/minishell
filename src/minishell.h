@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 18:37:17 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/10/03 01:51:56 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/10/05 01:34:54 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct	s_mini
 	int			free_signal;
 }				t_mini;
 
+int				g_signal;
+
 char			***loadev(char **envp);
 void			check_pipes(char *line, t_mini *all);
 void			get_path(t_mini *all);
@@ -97,6 +99,7 @@ int				ft_cmdlen(char ***cmdl);
 int				ft_arglen(char **cmd);
 int				is_pipe(char c);
 int				is_final_arg(char c);
+int				redir(char **cmdl);
 char			***add_cmdtcmdl(char **cmd, char ***cmdl);
 char			**add_argtcmd(char *arg, char **cmd);
 char			*add_strtarg(char *str, char *arg);
@@ -105,6 +108,8 @@ char			*create_strco2(t_mini *all, int *cont);
 char			*create_strtstr(t_mini *all, int *cont, int *flag);
 void			free_3d(char ***str);
 void			free_2d(char **str);
+int				check_out(char **tmp, char **input_file, t_mini *all);
+int				check_in(char **tmp, char **input_file, t_mini *all);
 /*
 ** ---------------------builtins------------------
 */

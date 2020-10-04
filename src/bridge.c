@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:14:53 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/17 16:39:40 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/10/05 01:35:52 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,5 @@ void	bridge(char **cmdl, t_mini *all)
 		parse_redir(cmdl, all);
 	else
 		try_exec(all, cmdl);
+	g_signal = 0;
 }

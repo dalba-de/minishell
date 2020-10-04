@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 18:29:56 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/09/14 18:30:52 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/10/05 01:35:40 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char		***parse_cmdlist(t_mini *all)
 	char	**cmd;
 	char	***cmdl;
 
+	g_signal = 1;
 	*cont = 0;
 	cmd = NULL;
 	cmdl = NULL;

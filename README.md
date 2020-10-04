@@ -1,17 +1,6 @@
 # Minishell
 
-### NORMINETTE IN
-* minishell.c y minishell.h
-* bridge.c
-* exec/
-* parser/ (excepto utils)
-* builtins
 
-### HECHO
-* Uso de $?.
-* Export sin argumentos.
-* Uso de $ cuando hay comillas.
-* Uso de $? entre comillas.
 
 ### Resources
 * [Como colaborar en un proyecto en Gihub](https://gist.github.com/BCasal/026e4c7f5c71418485c1)

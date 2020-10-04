@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:43:21 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/10/02 18:11:22 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/10/05 01:18:47 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ void	forking_pipe(t_mini *all, int p[2], int fd_in, char ***cmd)
 	{
 		all->my_argv[i] = (*cmd)[i];
 		i++;
+	}
+	if (redir(all->my_argv))
+	{
+		parse_redir(all->my_argv, all);
+		exit(all->exit_status);
 	}
 	try_exec(all, all->my_argv);
 	exit(all->exit_status);

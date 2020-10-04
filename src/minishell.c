@@ -6,7 +6,7 @@
 /*   By: dalba-de <dalba-de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 12:45:11 by dalba-de          #+#    #+#             */
-/*   Updated: 2020/10/03 01:54:51 by dalba-de         ###   ########.fr       */
+/*   Updated: 2020/10/05 01:36:09 by dalba-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	free_3d(char ***str)
 void	handle_signal(int signo)
 {
 	(void)signo;
-	ft_putstr_fd("\n\033[1;31mMinishell>> \033[0m", 1);
+	if (!g_signal)
+		ft_putstr_fd("\n\033[1;31mMinishell>> \033[0m", 1);
 }
 
 void	init(t_mini *all, char **envp, char **argv, int argc)
@@ -59,6 +60,7 @@ void	init(t_mini *all, char **envp, char **argv, int argc)
 	all->double_redir = 0;
 	all->path_str = NULL;
 	all->original_ev = envp;
+	g_signal = 0;
 	magic(envp);
 }
 
@@ -74,7 +76,7 @@ int		main(int argc, char **argv, char *envp[])
 	init(&all, envp, argv, argc);
 	while (1)
 	{
-		ft_putstr_fd("\033[1;31mMinishell>> \033[0m", STDOUT_FILENO);
+		ft_putstr_fd("\033[1;31mMinishell>> \033[0m", STDERR_FILENO);
 		rd = get_next_line(STDIN_FILENO, &line);
 		if (rd == 0)
 			break ;
