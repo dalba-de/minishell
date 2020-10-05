@@ -28,7 +28,7 @@ Ejecutar con `./minishell`
 
 ### Ejemplo de parte obligatoria
 
-![](https://raw.githubusercontent.com/dalba-de/minishell/master/minishell.bmp)
+![](https://raw.githubusercontent.com/dalba-de/minishell/master/minishell.bmp?token=ANYERTEHP3XMNU4DENAAWHC7PJVGW)
 
 ### Resources
 * [Como colaborar en un proyecto en Gihub](https://gist.github.com/BCasal/026e4c7f5c71418485c1)
