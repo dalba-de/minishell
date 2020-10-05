@@ -24,7 +24,7 @@ Proyecto de 42 Madrid, consistente en recodificar una shell de UNIX similar a ba
 ### Uso
 
 Compilar con `make`
-Ejecutar con `./minishell` && `make run`
+Ejecutar con `./minishell` || `make run`
 
 ### Ejemplo de parte obligatoria
 
