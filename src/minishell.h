@@ -62,6 +62,7 @@ typedef struct	s_mini
 
 int				g_signal;
 
+void			minishell(char *envp[]);
 char			***loadev(char **envp);
 void			check_pipes(char *line, t_mini *all);
 void			get_path(t_mini *all);

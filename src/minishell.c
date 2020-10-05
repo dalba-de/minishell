@@ -49,10 +49,8 @@ void	handle_signal(int signo)
 		ft_putstr_fd("\n\033[1;31mMinishell>> \033[0m", 1);
 }
 
-void	init(t_mini *all, char **envp, char **argv, int argc)
+void	init(t_mini *all, char **envp)
 {
-	(void)argc;
-	(void)argv;
 	ft_bzero(all, sizeof(t_mini));
 	all->ev = loadev(envp);
 	all->exit_status = 0;
@@ -64,25 +62,22 @@ void	init(t_mini *all, char **envp, char **argv, int argc)
 	magic(envp);
 }
 
-int		main(int argc, char **argv, char *envp[])
+void		minishell(char *envp[])
 {
 	char	*line;
 	t_mini	all;
 	int		i;
 	char	***cmdl;
-	int		rd;
 
 	signal(SIGINT, handle_signal);
-	init(&all, envp, argv, argc);
+	init(&all, envp);
 	while (1)
 	{
 		ft_putstr_fd("\033[1;31mMinishell>> \033[0m", STDERR_FILENO);
-		rd = get_next_line(STDIN_FILENO, &line);
-		if (rd == 0)
+		if (get_next_line(STDIN_FILENO, &line) < 1)
 			break ;
 		all.strl = line;
-		cmdl = parse_cmdlist(&all);
-		if (cmdl == NULL)
+		if ((cmdl = parse_cmdlist(&all)) == NULL)
 			continue ;
 		i = 0;
 		while (cmdl[i] != NULL)
@@ -90,5 +85,4 @@ int		main(int argc, char **argv, char *envp[])
 		free(line);
 		free_3d(cmdl);
 	}
-	return (0);
 }

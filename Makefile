@@ -61,10 +61,13 @@ all			:	$(NAME)
 # Entrada para el bonus
 bonus		:	$(NAME)
 
-# Genera programa Cube3d
-$(NAME)	:	$(OBJSUBDIRS) $(LIBS) $(ALLCOBJS)
+# Genera programa Minishell
+$(NAME)		:	$(OBJSUBDIRS) $(LIBS) $(ALLCOBJS)
 	$(C) $(CFLAGS) $(INCDIRS2) -o $(NAME) $(ALLCOBJS) $(LIBS)
 
+# Inicializa Minishell
+run			:	$(NAME)
+	@./$(NAME)
 # Generate rules for all objects
 $(foreach F,$(ALLCS), $(eval $(call COMPILER,$(C),$(call C2O,$(F)),$(F),$(CFLAGS) $(INCDIRS))))
 $(foreach F,$(ALLCSLIBS), $(eval $(call COMPILER,$(C),$(call CL2O,$(F)),$(F),$(CFLAGS) $(INCDIRS))))
