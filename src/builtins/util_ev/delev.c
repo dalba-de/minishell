@@ -28,7 +28,7 @@ void	delev(t_mini *all, char *key)
 		if (ft_strncmp(all->ev[cont1 + cont2][0], key,
 		ft_strlen(all->ev[cont1 + cont2][0])) != 0)
 		{
-			arr[cont1] = malloc(sizeof(char *) * (2));
+			arr[cont1] = malloc(sizeof(char *) * (3));
 			arr[cont1][0] = ft_strdup(all->ev[cont1 + cont2][0]);
 			arr[cont1][1] = ft_strdup(all->ev[cont1 + cont2][1]);
 			arr[cont1][2] = NULL;

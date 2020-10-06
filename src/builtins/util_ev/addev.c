@@ -23,13 +23,13 @@ void	addev(t_mini *all, char *key, char *value)
 	cont = 0;
 	while (cont < len)
 	{
-		arr[cont] = malloc(sizeof(char *) * (2));
+		arr[cont] = malloc(sizeof(char *) * (3));
 		arr[cont][0] = ft_strdup(all->ev[cont][0]);
 		arr[cont][1] = ft_strdup(all->ev[cont][1]);
 		arr[cont][2] = NULL;
 		cont++;
 	}
-	arr[cont] = malloc(sizeof(char *) * (2));
+	arr[cont] = malloc(sizeof(char *) * (3));
 	arr[cont][0] = ft_strdup(key);
 	arr[cont][1] = value == NULL ? (ft_strdup("")) : (ft_strdup(value));
 	arr[cont][2] = NULL;
