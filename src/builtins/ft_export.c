@@ -59,8 +59,9 @@ void	sort_env(t_mini *all)
 void	ft_export(t_mini *all, char **cmdl)
 {
 	int		cont;
-	char	*arr1;
-	char	*arr2;
+	char	*key;
+	char	*value;
+	char	*valuenew;
 
 	cont = 1;
 	if (cmdl[1] == NULL)
@@ -73,13 +74,13 @@ void	ft_export(t_mini *all, char **cmdl)
 			cont++;
 			continue;
 		}
-		if (!search_key_ev(all->ev, arr1 = ft_strcdup(cmdl[cont], '=')))
-		{
-			addev(all, arr1, arr2 = ft_strcdupinv(cmdl[cont], '='));
-			free(arr2);
-			all->exit_status = 0;
-		}
-		free(arr1);
+		if ((value = search_key_ev(all->ev, key = ft_strcdup(cmdl[cont], '='))) != NULL)
+			delev(all, key);
+		addev(all, key, valuenew = ft_strcdupinv(cmdl[cont], '='));
+		value != NULL ? (free(value)) : (0);
+		valuenew != NULL ? (free(valuenew)) : (0);
+		key != NULL ? (free(key)) : (0);
+		all->exit_status = 0;
 		cont++;
 	}
 }
