@@ -28,7 +28,7 @@ Ejecutar con `./minishell` || `make run`
 
 ### Ejemplo de parte obligatoria
 
-![](https://raw.githubusercontent.com/dalba-de/minishell/master/minishell.bmp?token=ANYERTEHP3XMNU4DENAAWHC7PJVGW)
+![](https://raw.githubusercontent.com/dalba-de/minishell/master/minishell.bmp?token=ANYERTBOJP4TIIZSPY5RVUC7PWJPI)
 
 ### Resources
 * [Como colaborar en un proyecto en Gihub](https://gist.github.com/BCasal/026e4c7f5c71418485c1)
@@ -40,6 +40,7 @@ Ejecutar con `./minishell` || `make run`
 * [Bash: ¿Cual es la diferencia entre las comillas dobles y simples?.](https://logico.ar/blog/2018/12/19/bash-cual-es-la-diferencia-entre-las-comillas-dobles-y-simples)
 * [Linux para novatos: Redirecciones y tuberías en Bash](https://hipertextual.com/archivo/2014/07/redirecciones-y-tuberias-bash/)
 * [Writing Your Own Shell](https://linuxgazette.net/111/ramankutty.html)
+* [Line edition tool using C termcap library](https://github.com/hdelaby/line_edition)
 
 ### Créditos
 
