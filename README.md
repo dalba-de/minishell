@@ -28,7 +28,7 @@ Ejecutar con `./minishell` || `make run`
 
 ### Ejemplo de parte obligatoria
 
-![](https://raw.githubusercontent.com/dalba-de/minishell/master/minishell.bmp?token=ANYERTBOJP4TIIZSPY5RVUC7PWJPI)
+![](https://raw.githubusercontent.com/dalba-de/minishell/master/minishell.bmp)
 
 ### Resources
 * [Como colaborar en un proyecto en Gihub](https://gist.github.com/BCasal/026e4c7f5c71418485c1)
