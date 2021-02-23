@@ -31,7 +31,7 @@ Ejecutar con `./minishell` || `make run`
 ![](https://raw.githubusercontent.com/dalba-de/minishell/master/minishell.bmp)
 
 ### Resources
-* [Como colaborar en un proyecto en Gihub](https://gist.github.com/BCasal/026e4c7f5c71418485c1)
+* [Como colaborar en un proyecto en Github](https://gist.github.com/BCasal/026e4c7f5c71418485c1)
 * [Making your own Linux Shell in C](https://www.geeksforgeeks.org/making-linux-shell-c/)
 * [Tutorial - Write a Shell in C](https://brennan.io/2015/01/16/write-a-shell-in-c/)
 * [How To Write A Tiny Shell In C](https://danrl.com/blog/2018/how-to-write-a-tiny-shell-in-c/)
